@@ -6,12 +6,12 @@ from fastapi_jwt_auth.exceptions import AuthJWTException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 
-from connectdb import ConnectionPSQL
+from connectdb import Connection
 
 
-connectionPSQL = ConnectionPSQL()
-connectionPSQL.connect()
-connectionPSQL.create_tables()
+connectionDB = Connection()
+connectionDB.connect()
+connectionDB.create_tables()
 
 
 app = FastAPI()

@@ -1,16 +1,21 @@
 import psycopg2
-from config import config
+import redis
 
-class ConnectionPSQL:
+from config import configPSQL, configREDIS
+
+
+class Connection:
     def __init__(self):
         self.cur = None
         self.conn = None
+        self.redisConn = None
+        self.redisCur = None
 
     def connect(self):
         """ Connect to the PostgreSQL database server """
         try:
             # read connection parameters
-            params = config()
+            params = configPSQL()
 
             # connect to the PostgreSQL server
             print('Connecting to the PostgreSQL database...')
@@ -27,6 +32,16 @@ class ConnectionPSQL:
             db_version = self.cur.fetchone()
             print(db_version)
 
+            # ---------------------------------------
+            print("testing redis")
+            params = configREDIS()
+            self.redisConn = redis.Redis(**params)
+            if self.redisConn.ping():
+                print("PONG")
+            else:
+                print("Connection failed!")
+            self.redisConn.mset({"Croatia": "Zagreb", "Bahamas": "Nassau"})
+            print(self.redisConn.get("Bahamas"))
 
             # close the communication with the PostgreSQL
             # cur.close()
