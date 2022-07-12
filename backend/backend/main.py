@@ -1,12 +1,17 @@
-from typing import Optional
 
-import psycopg2
 from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.responses import JSONResponse
 from fastapi_jwt_auth import AuthJWT
 from fastapi_jwt_auth.exceptions import AuthJWTException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+
+from connectdb import ConnectionPSQL
+
+
+connectionPSQL = ConnectionPSQL()
+connectionPSQL.connect()
+connectionPSQL.create_tables()
 
 
 app = FastAPI()
@@ -69,3 +74,4 @@ def user(Authorize: AuthJWT = Depends()):
     return {"user": 123124124, 'data': 'jwt test works'}
     # current_user = Authorize.get_jwt_subject()
     # return {"user": current_user, 'data': 'jwt test works'}
+
