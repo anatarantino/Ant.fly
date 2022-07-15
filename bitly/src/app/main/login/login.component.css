@@ -1,0 +1,16 @@
+#parentDiv {
+    position: relative;
+}
+
+#childDiv {
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+}
+
+.content{
+  position:absolute; z-index:3;
+ opacity:0.9
+
+}
