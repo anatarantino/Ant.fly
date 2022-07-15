@@ -59,33 +59,37 @@
 
   <div class="content">
     <div class="container-fluid content-container ">
-
-
-    <form [formGroup]='form' (ngSubmit)='login()'>
+      <div class="row w-50 m-0 align-items-center justify-content-center login-container">
       <div class="col-12">
-      <label>Email
-        <input type='text' formControlName='email'/>
-      </label>
+        <h1 class="text-center title">Login</h1>
       </div>
       <div class="col-12">
-      <label>Password
-        <input type='password' formControlName='password'/>
-      </label>
-      </div>
-      <label>
-        <input type='text' formControlName='username' hidden>
-      </label>
-      <div>
-        <button type='submit' [disabled]='!this.form.valid'>
-          Login
-        </button>
-      </div>
-    </form>
+      <form [formGroup]='form' (ngSubmit)='login()'>
+        <div class="col-12">
+          <label>Email
+            <input type='text' formControlName='email'/>
+          </label>
         </div>
+        <div class="col-12">
+          <label>Password
+            <input type='password' formControlName='password'/>
+          </label>
+        </div>
+        <label>
+          <input type='text' formControlName='username' hidden>
+        </label>
+        <div>
+          <button type='submit' [disabled]='!this.form.valid'>
+            Login
+          </button>
+        </div>
+      </form>
+      </div>
+    </div>
+      </div>
+
 
   </div>
-
-</div>
 
 
 

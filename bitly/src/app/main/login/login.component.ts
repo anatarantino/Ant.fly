@@ -11,6 +11,8 @@ import {ApiService} from '../../services/api.service'
 })
 export class LoginComponent implements OnInit {
   form: FormGroup
+  showPass = true;
+
   constructor(
     private _api : ApiService,
     private _auth: AuthService,
