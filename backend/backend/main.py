@@ -1,3 +1,4 @@
+from typing import Optional, Union
 
 from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.responses import JSONResponse
@@ -21,6 +22,14 @@ origins = [
     "http://localhost:4200",
 ]
 
+status_codes = {
+    'ok': 200,
+    'unauthorized': 401,
+    'error': 404,
+    'conflict': 409,
+
+}
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -31,9 +40,9 @@ app.add_middleware(
 
 
 class User(BaseModel):
-    username: str
+    email: str
     password: str
-
+    username: str
 
 class Settings(BaseModel):
     authjwt_secret_key: str = "my_jwt_secret"
@@ -56,16 +65,54 @@ def authjwt_exception_handler(request: Request, exc: AuthJWTException):
 def read_root():
     return {"Hello": "World Rasyue"}
 
+@app.post('/register')
+def register(user: User, Authorize: AuthJWT = Depends()):
+    if connectionDB.register(user) == -1:
+        raise HTTPException(status_code=status_codes['conflict'], detail=f"Email {user.email} already exists.")
+    return JSONResponse(
+        status_code=status_codes['ok'],
+        content={"detail": "user registered successfully"}
+    )
 
 @app.post('/login')
 def login(user: User, Authorize: AuthJWT = Depends()):
-    # user.username
-    # user.password
-    # this is the part where we will check the user credentials with our database record
-    # but since we are not going to use any db, straight away we will just create the token and send it back
-    # subject identifier for who this token is for example id or username from database
-    access_token = Authorize.create_access_token(subject=user.username)
+    result = connectionDB.login(user)
+    if result == -1:
+        raise HTTPException(status_code=status_codes['unauthorized'], detail=f"Email {user.email} is not registered.")
+    if result == -2:
+        raise HTTPException(status_code=status_codes['unauthorized'], detail=f"Password does not match.")
+
+    access_token = Authorize.create_access_token(subject=user.email)
     return {"access_token": access_token}
+
+@app.post('/{short_link}')
+def create_link(long_link, user: User, short_link, title: Optional[str] = None):
+
+    if connectionDB.create_link(long_link, short_link, user, title) == -1:
+        raise HTTPException(status_code=status_codes['conflict'], detail=f"Link {short_link} already exists.")
+    return JSONResponse(
+        status_code=status_codes['ok'],
+        content={"detail": "Link created successfully"}
+    )
+
+
+@app.delete('/{short_link}')
+def delete_link(short_link):
+    if connectionDB.delete_link(short_link) == -1:
+        raise HTTPException(status_code=status_codes['error'], detail=f"Link {short_link} doesn't exist.")
+    return JSONResponse(
+        status_code=status_codes['ok'],
+        content={"detail": "Link deleted successfully"}
+    )
+
+@app.put("/{short_link}")
+def change_link(old_link, short_link, title: Optional[str] = None):
+    if connectionDB.change_link(old_link, short_link) == -1:
+        raise HTTPException(status_code=status_codes['error'], detail=f"Link {old_link} doesn't exist.")
+    return JSONResponse(
+        status_code=status_codes['ok'],
+        content={"detail": "Link changed successfully"}
+    )
 
 
 @app.get('/test-jwt')
