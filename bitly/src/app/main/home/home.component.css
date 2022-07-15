@@ -11,6 +11,31 @@
 
 .content{
   position:absolute; z-index:3;
- opacity:0.9
+
 
 }
+.description, .steps, .ingredient-list {
+  padding: 20px;
+}
+
+.title-author-container {
+  padding: 30px;
+}
+
+.content-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.recipe-container {
+  font-size: medium;
+  background: whitesmoke;
+  display: block;
+  justify-content: center;
+  margin: 0 auto;
+  border-radius: 10px;
+  width: 70%;
+}
+
+
