@@ -1,37 +1,34 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
-import {ApiService} from '../../services/api.service'
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {ApiService} from "../../services/api.service";
+import {AuthService} from "../../services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.css']
 })
-export class LoginComponent implements OnInit {
-  form: FormGroup
-  disabled = false
+export class RegisterComponent implements OnInit {
   constructor(
     private _api : ApiService,
     private _auth: AuthService,
     private router: Router,
     public fb: FormBuilder
   ) { }
-
+  form: FormGroup
+  disabled = false
   ngOnInit(): void {
     this.form = this.fb.group({
       email: ['', Validators.required],
       password:['', Validators.required],
-      username:['']
-
+      username:['', Validators.required]
     });
-
   }
 
-  login(){
+  register(){
     let b = this.form.value
-    this._api.postTypeRequest('login', b).subscribe((res: any) => {
+    this._api.postTypeRequest('register', b).subscribe((res: any) => {
       console.log(res)
       if(res.access_token){
         this._auth.setDataInLocalStorage('token', res.access_token)

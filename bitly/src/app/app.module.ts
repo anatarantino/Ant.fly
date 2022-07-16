@@ -9,7 +9,8 @@ import { HomeComponent } from './main/home/home.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {InterceptorService} from "./services/interceptor-service.service";
-import { RegisterComponent } from './register/register.component';
+import { RegisterComponent } from './main/register/register.component';
+
 
 @NgModule({
   declarations: [
