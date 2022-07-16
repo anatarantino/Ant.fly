@@ -38,4 +38,32 @@
   width: 70%;
 }
 
+.delete-btn {
+  background-color: #8a2bff ;
+  border-color: #8a2bff ;
+  float: right;
+  color: white;
+}
+
+.color-btn {
+  background-color: #a760ff;
+  border-color: #a760ff;
+  color: white;
+}
+
+.color-btn:hover, .color-btn:focus, .color-btn:active {
+  color: #a760ff !important;
+  background-color: transparent !important;
+  border-color: #a760ff !important;
+}
+
+.delete-btn:hover, .delete-btn:focus, .delete-btn:active {
+  color: #8a2bff  !important;
+  background-color: transparent !important;
+  border-color: #8a2bff  !important;
+}
+
+.delete-btn:focus, .delete-btn:active:focus {
+  box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.4);
+}
 
