@@ -57,145 +57,147 @@
     </svg>
   </div>
 
-<!--  <div class="content">-->
-<!--    <div class="container-fluid content-container ">-->
-<!--      <div class="row w-50 m-0 align-items-center justify-content-center login-container">-->
-<!--        <div class="col-12">-->
-<!--          <h1 class="text-center title">Login</h1>-->
-<!--        </div>-->
-<!--        <div class="col-12">-->
-<!--          <div class="container-fluid">-->
-<!--            <form [formGroup]='form' (ngSubmit)='login()'>-->
-<!--              <div class="row">-->
-<!--                <div class="col-12">-->
-<!--                  <label class="form-label">Email-->
-<!--                    <input class="form-control" type='text' formControlName='email' style="text-transform:lowercase"/>-->
-<!--                  </label>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <div class="row">-->
-<!--                <div class="col-12">-->
-<!--                  <label class="form-label">Password-->
-<!--                    <input class="form-control" type='password' formControlName='password'/>-->
-<!--                  </label>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--              <label>-->
-<!--                <input type='text' formControlName='username' hidden>-->
-<!--              </label>-->
-<!--              <div class="row justify-content-center align-items-center">-->
-<!--                <div class="col-6 px-0 d-flex align-items-center justify-content-center">-->
-<!--                  <button type='submit' [disabled]='!this.form.valid' class="btn btn-outline-dark">-->
-<!--                    Login-->
-<!--                  </button>-->
-<!--                </div>-->
-<!--              </div>-->
-<!--            </form>-->
-<!--          </div>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
+  <!--  <div class="content">-->
+  <!--    <div class="container-fluid content-container ">-->
+  <!--      <div class="row w-50 m-0 align-items-center justify-content-center login-container">-->
+  <!--        <div class="col-12">-->
+  <!--          <h1 class="text-center title">Login</h1>-->
+  <!--        </div>-->
+  <!--        <div class="col-12">-->
+  <!--          <div class="container-fluid">-->
+  <!--            <form [formGroup]='form' (ngSubmit)='login()'>-->
+  <!--              <div class="row">-->
+  <!--                <div class="col-12">-->
+  <!--                  <label class="form-label">Email-->
+  <!--                    <input class="form-control" type='text' formControlName='email' style="text-transform:lowercase"/>-->
+  <!--                  </label>-->
+  <!--                </div>-->
+  <!--              </div>-->
+  <!--              <div class="row">-->
+  <!--                <div class="col-12">-->
+  <!--                  <label class="form-label">Password-->
+  <!--                    <input class="form-control" type='password' formControlName='password'/>-->
+  <!--                  </label>-->
+  <!--                </div>-->
+  <!--              </div>-->
+  <!--              <label>-->
+  <!--                <input type='text' formControlName='username' hidden>-->
+  <!--              </label>-->
+  <!--              <div class="row justify-content-center align-items-center">-->
+  <!--                <div class="col-6 px-0 d-flex align-items-center justify-content-center">-->
+  <!--                  <button type='submit' [disabled]='!this.form.valid' class="btn btn-outline-dark">-->
+  <!--                    Login-->
+  <!--                  </button>-->
+  <!--                </div>-->
+  <!--              </div>-->
+  <!--            </form>-->
+  <!--          </div>-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+  <!--  </div>-->
 
   <div class="container-fluid content">
-  <div class="container-lg p-5 content-container" style="min-height: 75%">
-    <div class="row w-50 m-0 align-items-center justify-content-center login-container">
-      <div class="col-12 d-flex align-items-center justify-content-center">
-        <h1>
-          Log in
-        </h1>
-      </div>
-      <div class="col-12">
-        <div class="container-fluid px-0">
-          <form [formGroup]="form" id="form" (ngSubmit)="login()">
-            <div class="row">
-              <div class="col-12">
-                <label class="form-label">
-                  Email
-                </label>
-                <input formControlName="email" type="email" class="form-control"
-                       style="text-transform:lowercase"/>
-<!--                <span *ngIf="!form.get('username').valid && form.get('username').touched">-->
-<!--                  <span *ngIf="form.get('username').errors['required']" class="error-msg">-->
-<!--                    {{'login.invalidFeedback.username' | translate}}-->
-<!--                  </span>-->
-<!--                  <span *ngIf="form.get('username').errors['minlength']" class="error-msg">-->
-<!--                        {{'Size.registerForm.username.min' | translate: {min: minUsernameLength} }}-->
-<!--                        </span>-->
-<!--                  <span *ngIf="form.get('username').errors['maxlength']" class="error-msg">-->
-<!--                      {{'Size.registerForm.username.max' | translate: {max: maxUsernameLength} }}-->
-<!--                      </span>-->
-<!--                </span>-->
-              </div>
-            </div>
-            <div class="col-12 mt-2">
+    <div class="container-lg p-5 content-container" style="min-height: 75%">
+      <div class="row w-50 m-0 align-items-center justify-content-center login-container">
+        <div class="col-12 d-flex align-items-center justify-content-center">
+          <h1>
+            Log in
+          </h1>
+        </div>
+        <div class="col-12">
+          <div class="container-fluid px-0">
+            <form [formGroup]="form" id="form" (ngSubmit)="login()">
               <div class="row">
-                <label for="password" class="form-label">
-                  password
-                </label>
                 <div class="col-12">
+                  <label class="form-label">
+                    Email
+                  </label>
+                  <input formControlName="email" type="email" class="form-control"
+                         style="text-transform:lowercase"/>
+                  <!--                <span *ngIf="!form.get('username').valid && form.get('username').touched">-->
+                  <!--                  <span *ngIf="form.get('username').errors['required']" class="error-msg">-->
+                  <!--                    {{'login.invalidFeedback.username' | translate}}-->
+                  <!--                  </span>-->
+                  <!--                  <span *ngIf="form.get('username').errors['minlength']" class="error-msg">-->
+                  <!--                        {{'Size.registerForm.username.min' | translate: {min: minUsernameLength} }}-->
+                  <!--                        </span>-->
+                  <!--                  <span *ngIf="form.get('username').errors['maxlength']" class="error-msg">-->
+                  <!--                      {{'Size.registerForm.username.max' | translate: {max: maxUsernameLength} }}-->
+                  <!--                      </span>-->
+                  <!--                </span>-->
+                </div>
+              </div>
+              <div class="col-12 mt-2">
+                <div class="row">
+                  <label for="password" class="form-label">
+                    password
+                  </label>
+                  <div class="col-12">
                     <input autocomplete="on" formControlName="password"
                            class="form-control" id="password" name="password" aria-describedby="password input">
                   </div>
-<!--                  <div class="col-12 px-0 d-flex justify-content-start align-items-center">-->
-<!--                  <span *ngIf="!form.get('password').valid && form.get('password').touched">-->
-<!--                        <span *ngIf="form.get('password').errors['required']" class="error-msg">-->
-<!--                          {{'Size.registerForm.password' | translate: {min: minPassLength, max: maxPassLength} }}-->
-<!--                        </span>-->
-<!--                        <span *ngIf="form.get('password').errors['maxlength']" class="error-msg">-->
-<!--                        {{'Size.registerForm.password.max' | translate: {max: maxPassLength} }}-->
-<!--                        </span>-->
-<!--                        <span *ngIf="form.get('password').errors['minlength']" class="error-msg">-->
-<!--                        {{'Size.registerForm.password.min' | translate: {min: minPassLength} }}-->
-<!--                        </span>-->
-<!--                  </span>-->
-<!--                  </div>-->
-<!--                  <div class="invalid-feedback">-->
-<!--                    {{'login.invalidFeedback.password' | translate}}-->
-<!--                  </div>-->
+                  <!--                  <div class="col-12 px-0 d-flex justify-content-start align-items-center">-->
+                  <!--                  <span *ngIf="!form.get('password').valid && form.get('password').touched">-->
+                  <!--                        <span *ngIf="form.get('password').errors['required']" class="error-msg">-->
+                  <!--                          {{'Size.registerForm.password' | translate: {min: minPassLength, max: maxPassLength} }}-->
+                  <!--                        </span>-->
+                  <!--                        <span *ngIf="form.get('password').errors['maxlength']" class="error-msg">-->
+                  <!--                        {{'Size.registerForm.password.max' | translate: {max: maxPassLength} }}-->
+                  <!--                        </span>-->
+                  <!--                        <span *ngIf="form.get('password').errors['minlength']" class="error-msg">-->
+                  <!--                        {{'Size.registerForm.password.min' | translate: {min: minPassLength} }}-->
+                  <!--                        </span>-->
+                  <!--                  </span>-->
+                  <!--                  </div>-->
+                  <!--                  <div class="invalid-feedback">-->
+                  <!--                    {{'login.invalidFeedback.password' | translate}}-->
+                  <!--                  </div>-->
                 </div>
+                <div class="col-9">
+                  <a href="/register">Dont have an account yet? </a>
+                </div>
+              </div>
+              <label>
+                <input formControlName="username" type="text" class="form-control" hidden/>
+              </label>
+              <!--            <div class="col-12">-->
+              <!--              <div class="row">-->
+              <!--                <div class="col-6 form-check">-->
+              <!--                  <label class="form-check-label"><input class="form-check-input"-->
+              <!--                                                         name="j_rememberme"-->
+              <!--                                                         type="checkbox"/>-->
+              <!--                    {{'login.rememberMe' | translate}}-->
+              <!--                  </label>-->
+              <!--                </div>-->
+              <!--&lt;!&ndash;                <div class="col-6 passReset">&ndash;&gt;-->
+              <!--&lt;!&ndash;                  <app-req-reset-pass></app-req-reset-pass>&ndash;&gt;-->
+              <!--&lt;!&ndash;                </div>&ndash;&gt;-->
+              <!--              </div>-->
+              <!--            </div>-->
+              <!--             <div *ngIf="error" class="col-12 mt-2 d-flex align-items-sm-start px-0">-->
+              <!--                      <p class="error-msg">-->
+              <!--                        {{'login.error' | translate }}-->
+              <!--                      </p>-->
+              <!--                    </div>-->
 
-            </div>
-            <label>
-              <input formControlName="username" type="text" class="form-control" hidden/>
-            </label>
-            <!--            <div class="col-12">-->
-<!--              <div class="row">-->
-<!--                <div class="col-6 form-check">-->
-<!--                  <label class="form-check-label"><input class="form-check-input"-->
-<!--                                                         name="j_rememberme"-->
-<!--                                                         type="checkbox"/>-->
-<!--                    {{'login.rememberMe' | translate}}-->
-<!--                  </label>-->
-<!--                </div>-->
-<!--&lt;!&ndash;                <div class="col-6 passReset">&ndash;&gt;-->
-<!--&lt;!&ndash;                  <app-req-reset-pass></app-req-reset-pass>&ndash;&gt;-->
-<!--&lt;!&ndash;                </div>&ndash;&gt;-->
-<!--              </div>-->
-<!--            </div>-->
-<!--             <div *ngIf="error" class="col-12 mt-2 d-flex align-items-sm-start px-0">-->
-<!--                      <p class="error-msg">-->
-<!--                        {{'login.error' | translate }}-->
-<!--                      </p>-->
-<!--                    </div>-->
-
-            <div class="row p-2 justify-content-center align-items-center">
+              <div class="row p-2 justify-content-center align-items-center">
                 <div class="col-6 d-flex align-items-center justify-content-center">
                   <button type='submit' [disabled]='!this.form.valid' class="btn btn-outline-dark login-btn">
                     <span *ngIf="!disabled">
                         submit
                       </span>
-                  <span class="spinner-border spinner-border-sm" [hidden]="!disabled"></span>
+                    <span class="spinner-border spinner-border-sm" [hidden]="!disabled"></span>
                   </button>
                 </div>
               </div>
 
-          </form>
+            </form>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
 
 </div>
 
