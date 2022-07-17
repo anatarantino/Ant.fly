@@ -1,19 +1,21 @@
 #parentDiv {
-    position: relative;
+  position: relative;
 }
 
 #childDiv {
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 
-.content{
-  position:absolute; z-index:3;
+.content {
+  position: absolute;
+  z-index: 3;
 
 
 }
+
 .description, .steps, .ingredient-list {
   padding: 20px;
 }
@@ -39,9 +41,8 @@
 }
 
 .delete-btn {
-  background-color: #8a2bff ;
-  border-color: #8a2bff ;
-  float: right;
+  background-color: #8a2bff;
+  border-color: #8a2bff;
   color: white;
 }
 
@@ -55,15 +56,72 @@
   color: #a760ff !important;
   background-color: transparent !important;
   border-color: #a760ff !important;
+    box-shadow: 0 0 0 0.25rem transparent;
+
 }
 
 .delete-btn:hover, .delete-btn:focus, .delete-btn:active {
-  color: #8a2bff  !important;
+  color: #8a2bff !important;
   background-color: transparent !important;
-  border-color: #8a2bff  !important;
+  border-color: #8a2bff !important;
 }
 
 .delete-btn:focus, .delete-btn:active:focus {
-  box-shadow: 0 0 0 0.25rem rgba(255, 0, 0, 0.4);
+  box-shadow: 0 0 0 0.25rem transparent;
 }
 
+#search-title {
+  font-size: 55px;
+}
+
+.search-text {
+  text-align: center;
+  padding: 2%;
+}
+
+.search-box {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.input-group > .form-control:focus {
+  box-shadow: inset 0 0 0 1px transparent;
+}
+
+.search-glass {
+  color: #8a2bff;
+  background: transparent;
+  border: transparent;
+  box-shadow: inset 0 0 0 1px transparent;
+}
+
+.search-glass:focus {
+  box-shadow: inset 0 0 0 1px transparent;
+}
+
+.tag {
+  color: #a760ff;
+  background-color: #ededed;
+  border: none;
+  border-radius: 20px;
+  font-size: 15px;
+  height: 35px;
+  margin-right: 8px;
+}
+
+.tag:hover {
+  cursor: default !important;
+}
+
+.tag-div {
+  padding: 5px 15px !important;
+}
+
+.links-table {
+  text-align: -webkit-center;
+}
+
+.tag-row {
+  text-align: left;
+}

@@ -68,36 +68,129 @@
           </div>
         </div>
         <div class="row w-100 m-0">
-        <div class="col-12 ingredient-list">
-          <h3>My links</h3>
-          <table class="table" style="width:65%" align="center">
-            <tbody>
-            <th style="text-align: center">Title</th>
-            <th style="text-align: center">Shortened link</th>
-            <th style="text-align: center">Link</th>
-            <tr>
-              <td style="text-align: center; vertical-align: middle">Mi linkcito</td>
-              <td style="text-align: center; vertical-align: middle">ant.fly/miLinkcito</td>
-              <td style="text-align: center; vertical-align: middle">google.com</td>
-              <td style="text-align: center; vertical-align: middle">
-                <button type="button" class="btn btn-dark color-btn"><i class="fa fa-pencil" aria-hidden="true"></i></button>
-                <button type="button" class="btn btn-dark delete-btn"><i class="fa fa-trash" aria-hidden="true"></i></button>
-              </td>
-            </tr>
-            </tbody>
-          </table>
-          <div class="row justify-content-center align-content-center align-items-center">
-              <div class="col-2">
-                <button type="button" class="btn btn-dark color-btn" style="margin-top: 10px;"><i class="fa fa-plus" aria-hidden="true"></i></button>
+          <div class="col-12">
+            <h3>My links</h3>
+            <div class="search-box">
+              <div class="col-5 align-items-center">
+                <div class="row align-items-center justify-content-between" style="padding: 10px">
+
+                  <div class="p-1 bg-light rounded rounded-pill shadow-sm">
+                    <div class="input-group">
+                      <input #searchBar placeholder="search"
+                             class="form-control rounded rounded-pill border-0 bg-light"
+                             aria-describedby="button-addon1"/>
+                      <div class="input-group-append">
+                        <button type="button" class="btn btn-dark search-glass"><i class="fa fa-solid fa-search"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+
+            <!--            <table class="table" style="width:65%" align="center">-->
+            <!--              <tbody>-->
+            <!--              <th style="text-align: center">Title</th>-->
+            <!--              <th style="text-align: center">Shortened link</th>-->
+            <!--              <th style="text-align: center">Link</th>-->
+            <!--              <tr>-->
+            <!--                <td style="text-align: center; vertical-align: middle">Mi linkcito</td>-->
+            <!--                <td style="text-align: center; vertical-align: middle">ant.fly/miLinkcito</td>-->
+            <!--                <td style="text-align: center; vertical-align: middle">google.com</td>-->
+            <!--                <td style="text-align: center; vertical-align: middle">-->
+            <!--                  <button type="button" class="btn btn-dark color-btn"><i class="fa fa-pencil" aria-hidden="true"></i>-->
+            <!--                  </button>-->
+            <!--                  <button type="button" class="btn btn-dark delete-btn"><i class="fa fa-trash" aria-hidden="true"></i>-->
+            <!--                  </button>-->
+            <!--                </td>-->
+            <!--              </tr>-->
+            <!--              <tr>-->
+            <!--                &lt;!&ndash;                 <span *ngFor="let cat of categoryStrings; index as i">&ndash;&gt;&ndash;&gt;-->
+            <!--                &lt;!&ndash;              <button *ngIf="i < 3" class="category category-div btn-outline"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                      style="margin-bottom: 5px;margin-right: 6px;">{{cat}}</button>&ndash;&gt;-->
+            <!--                &lt;!&ndash;            </span>&ndash;&gt;-->
+            <!--                <td>-->
+            <!--                <span>-->
+            <!--                  <button class="category category-div btn-outline" style="margin-bottom: 5px;margin-right: 6px;">abc</button>-->
+            <!--                </span>-->
+            <!--                </td>-->
+            <!--              </tr>-->
+            <!--              </tbody>-->
+            <!--            </table>-->
+
+            <div class="col-12 links-table">
+              <div class="row justify-content-center align-content-center align-items-center" style="width: 80%">
+
+                <div class="col-3" style="text-align: center">
+                  <h5>Title</h5>
+                </div>
+                <div class="col-3" style="text-align: center">
+                  <h5>Shortened link</h5>
+                </div>
+                <div class="col-3" style="text-align: center">
+                  <h5>Link</h5>
+                </div>
+                <div class="col-3"></div>
+              </div>
+
+              <!--            FOR EVERY LINK-->
+              <!--ngFor-->
+              <div class="row justify-content-center align-content-center align-items-center" style="width: 80%">
+
+                <div class="col-3" style="text-align: center">
+                  <p>Mi linkcito</p>
+                </div>
+                <div class="col-3" style="text-align: center">
+                  <p>ant.fly/miLinkcito</p>
+                </div>
+                <div class="col-3" style="text-align: center">
+                  <p>google.com</p>
+                </div>
+                <div class="col-1">
+                  <button type="button" class="btn btn-dark color-btn"><i class="fa fa-pencil" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div class="col-1">
+                  <button type="button" class="btn btn-dark delete-btn"><i class="fa fa-tag" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <div class="col-1">
+
+                  <button type="button" class="btn btn-dark delete-btn"><i class="fa fa-trash" aria-hidden="true"></i>
+                  </button>
+                </div>
+
+              </div>
+
+              <!--            FOR EVERY TAG - esto estaria adentro del ngFor de cada link-->
+              <div class="row tag-row" style="width: 80%">
+                <div class="col-12">
+                  <button class="tag tag-div btn-outline">abc</button>
+                  <button class="tag tag-div btn-outline">hola gui</button>
+                  <button class="tag tag-div btn-outline">ke tag mas cool</button>
+
+                </div>
+
+              </div>
+              <!--end of ngFor-->
+
+
+              <div class="row justify-content-center align-content-center align-items-center">
+                <div class="col-2">
+                  <button type="button" class="btn btn-dark color-btn" style="margin-top: 10px;"><i class="fa fa-plus" aria-hidden="true"></i>
+                  </button>
+                </div>
               </div>
             </div>
+          </div>
         </div>
-      </div>
-      </div>
 
 
+      </div>
     </div>
   </div>
+
 </div>
-
-
