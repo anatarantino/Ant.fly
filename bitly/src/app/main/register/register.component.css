@@ -28,7 +28,8 @@
 
 .register-container {
   font-size: medium;
-  background: whitesmoke;
+  /*background: #f5f5f5;*/
+  background: rgba(245,245,245,0.5);
   display: block;
   justify-content: center;
   margin: 0 auto;

@@ -60,7 +60,7 @@
   <div class="container-fluid content">
     <div class="container-lg p-5 content-container" style="min-height: 75%">
       <div class="row w-50 m-0 align-items-center justify-content-center register-container">
-        <div class="col-12 d-flex align-items-center justify-content-center">
+        <div class="col-12 d-flex align-items-center justify-content-center title">
           <h1>
             Register
           </h1>
@@ -78,7 +78,7 @@
                 </div>
               </div>
               <div class="row">
-                <div class="col-12">
+                <div class="col-12 mt-2">
                   <label class="form-label">
                     Name
                   </label>
@@ -89,7 +89,7 @@
               <div class="col-12 mt-2">
                 <div class="row">
                   <label for="password" class="form-label">
-                    password
+                    Password
                   </label>
                   <div class="col-12">
                     <input autocomplete="on" formControlName="password"
@@ -99,10 +99,10 @@
               </div>
 
               <div class="row p-2 justify-content-center align-items-center">
-                <div class="col-6 d-flex align-items-center justify-content-center">
+                <div class="col-6 d-flex align-items-center justify-content-center mt-2 mb-2">
                   <button type='submit' [disabled]='!this.form.valid' class="btn btn-outline-dark login-btn">
                     <span *ngIf="!disabled">
-                        submit
+                        Submit
                       </span>
                     <span class="spinner-border spinner-border-sm" [hidden]="!disabled"></span>
                   </button>

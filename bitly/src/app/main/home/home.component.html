@@ -138,49 +138,53 @@
 
               <!--            FOR EVERY LINK-->
               <!--ngFor-->
-              <div class="row justify-content-center align-content-center align-items-center" style="width: 80%">
+              <!--                <span *ngFor="let link of links; index as i">-->
+              <div *ngFor="let link of links; index as i">
 
-                <div class="col-3" style="text-align: center">
-                  <p>Mi linkcito</p>
-                </div>
-                <div class="col-3" style="text-align: center">
-                  <p>ant.fly/miLinkcito</p>
-                </div>
-                <div class="col-3" style="text-align: center">
-                  <p>google.com</p>
-                </div>
-                <div class="col-1">
-                  <button type="button" class="btn btn-dark color-btn"><i class="fa fa-pencil" aria-hidden="true"></i>
-                  </button>
-                </div>
-                <div class="col-1">
-                  <button type="button" class="btn btn-dark delete-btn"><i class="fa fa-tag" aria-hidden="true"></i>
-                  </button>
-                </div>
-                <div class="col-1">
+                <div class="row justify-content-center align-content-center align-items-center" style="width: 80%">
 
-                  <button type="button" class="btn btn-dark delete-btn"><i class="fa fa-trash" aria-hidden="true"></i>
-                  </button>
-                </div>
+                  <div class="col-3" style="text-align: center">
+                    <p>{{link[2]}}</p>
+                  </div>
+                  <div class="col-3" style="text-align: center">
+                    <p>{{link[3]}}</p>
+                  </div>
+                  <div class="col-3" style="text-align: center">
+                    <p>{{link[4]}}</p>
+                  </div>
+                  <div class="col-1">
+                    <button type="button" class="btn btn-dark color-btn"><i class="fa fa-pencil" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <div class="col-1">
+                    <button type="button" class="btn btn-dark delete-btn"><i class="fa fa-tag" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <div class="col-1">
 
-              </div>
-
-              <!--            FOR EVERY TAG - esto estaria adentro del ngFor de cada link-->
-              <div class="row tag-row" style="width: 80%">
-                <div class="col-12">
-                  <button class="tag tag-div btn-outline">abc</button>
-                  <button class="tag tag-div btn-outline">hola gui</button>
-                  <button class="tag tag-div btn-outline">ke tag mas cool</button>
+                    <button type="button" class="btn btn-dark delete-btn"><i class="fa fa-trash" aria-hidden="true"></i>
+                    </button>
+                  </div>
 
                 </div>
 
+                <!--            FOR EVERY TAG - esto estaria adentro del ngFor de cada link-->
+
+                <div class="row tag-row" style="width: 80%">
+                  <div class="col-12">
+                    <span *ngFor="let tag of link[5]">
+                      <button class="tag tag-div btn-outline">{{tag[1]}}</button>
+                    </span>
+                  </div>
+                </div>
               </div>
               <!--end of ngFor-->
 
 
               <div class="row justify-content-center align-content-center align-items-center">
                 <div class="col-2">
-                  <button type="button" class="btn btn-dark color-btn" style="margin-top: 10px;"><i class="fa fa-plus" aria-hidden="true"></i>
+                  <button type="button" class="btn btn-dark color-btn" style="margin-top: 10px;"><i class="fa fa-plus"
+                                                                                                    aria-hidden="true"></i>
                   </button>
                 </div>
               </div>

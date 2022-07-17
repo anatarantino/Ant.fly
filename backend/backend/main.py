@@ -40,6 +40,7 @@ app.add_middleware(
 
 
 class User(BaseModel):
+    id_user: int = -1
     email: str
     password: str
     username: str
@@ -69,6 +70,7 @@ def read_root():
 def register(user: User, Authorize: AuthJWT = Depends()):
     if connectionDB.register(user) == -1:
         raise HTTPException(status_code=status_codes['conflict'], detail=f"Email {user.email} already exists.")
+    print(user)
     return JSONResponse(
         status_code=status_codes['ok'],
         content={"detail": "user registered successfully","status_code":200}
@@ -82,8 +84,18 @@ def login(user: User, Authorize: AuthJWT = Depends()):
     if result == -2:
         raise HTTPException(status_code=status_codes['unauthorized'], detail=f"Password does not match.")
 
-    access_token = Authorize.create_access_token(subject=user.email)
+    access_token = Authorize.create_access_token(subject=user.id_user)
     return {"access_token": access_token}
+
+@app.get('/home')
+def home(Authorize: AuthJWT = Depends()):
+    Authorize.jwt_required()
+    current_user = Authorize.get_jwt_subject()
+    links = connectionDB.get_user_links(current_user)
+    return JSONResponse(
+        status_code=status_codes['ok'],
+        content={"links": links, "status_code": 200}
+    )
 
 @app.post('/{short_link}')
 def create_link(long_link, user: User, short_link, title: Optional[str] = None):

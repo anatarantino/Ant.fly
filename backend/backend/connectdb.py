@@ -55,8 +55,8 @@ class Connection:
     def create_tables(self):
         self.cur.execute("create table if not exists users( user_id serial primary key, email varchar(255) unique not null, password text not null, name varchar(50) not null);")
         self.cur.execute("create table if not exists urls_data(url_id serial primary key, user_id integer references users(user_id), title text, redis_key text);")
-        self.cur.execute("create table if not exists url_tags(tag_id serial primary key, url_id integer references urls_data(url_id));")
-        self.cur.execute("create table if not exists user_tags(tag_id integer references url_tags(tag_id), user_id integer references users(user_id), tag_name text)")
+        self.cur.execute("create table if not exists user_tags(tag_id serial primary key, user_id integer references users(user_id), tag_name text)")
+        self.cur.execute("create table if not exists url_tags(tag_id integer references user_tags(tag_id), url_id integer references urls_data(url_id));")
         self.conn.commit()
 
     def close(self):
@@ -79,7 +79,6 @@ class Connection:
             return -1
 
     def login(self, user):
-        print(user.password)
         query = "select u.password from users u where u.email = '{0}'".format(user.email)
         self.cur.execute(query)
         result: bytes = self.cur.fetchall()
@@ -91,9 +90,44 @@ class Connection:
         if not bcrypt.checkpw(pwd,stored_hashed):
             return -2
 
+        query = "select u.user_id from users u where u.email = '{0}'".format(user.email)
+        self.cur.execute(query)
+        user.id_user = self.cur.fetchone()[0]
+
         return 1
 
+    def get_user_links(self, id_user):
+        query = "select * from urls_data where user_id = '{0}'".format(id_user)
+        self.cur.execute(query)
+        result = self.cur.fetchall()
+        results = []
 
+        urls_ids = []
+        for i in range(len(result)):
+            url_data = []
+            for j in result[i]:
+                url_data.append(j)
+            results.append(url_data)
+            urls_ids.append(results[i][0])
+
+            long_value = self.redisConn.get(f"{results[i][3]}").decode('utf-8')
+            results[i].append(long_value)
+
+            tags_query = "select tag_id from url_tags where url_id = '{0}'".format(results[i][0])
+            self.cur.execute(tags_query)
+            tags_result = self.cur.fetchall()
+            tags = []
+            for t in tags_result:
+                tag = []
+                tag.append(t[0])
+                tags_name = "select tag_name from user_tags where tag_id = '{0}'".format(t[0])
+                self.cur.execute(tags_name)
+                tag_name_result = self.cur.fetchone()
+                tag.append(tag_name_result[0])
+                tags.append(tag)
+            results[i].append(tags)
+        print(results)
+        return results
 
 
     def create_link(self, long_link, short_link, user, title):
