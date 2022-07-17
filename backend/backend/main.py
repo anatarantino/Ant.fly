@@ -71,7 +71,7 @@ def register(user: User, Authorize: AuthJWT = Depends()):
         raise HTTPException(status_code=status_codes['conflict'], detail=f"Email {user.email} already exists.")
     return JSONResponse(
         status_code=status_codes['ok'],
-        content={"detail": "user registered successfully"}
+        content={"detail": "user registered successfully","status_code":200}
     )
 
 @app.post('/login')
