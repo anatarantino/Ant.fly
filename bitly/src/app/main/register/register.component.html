@@ -78,6 +78,7 @@
                     <span *ngIf="form.controls['email'].hasError('required')" class="error-msg">Must be between 6 and 254 characters.</span>
                     <span *ngIf="form.controls['email'].hasError('minlength')" class="error-msg">Must be between 6 and 254 characters.</span>
                     <span *ngIf="form.controls['email'].hasError('maxlength')" class="error-msg">Must be between 6 and 254 characters.</span>
+                    <span *ngIf="form.controls['email'].hasError('pattern')" class="error-msg">This email is invalid.</span>
                     <span *ngIf="form.controls['email'].hasError('valid')"
                           class="formError">This email is invalid.</span>
                   </span>

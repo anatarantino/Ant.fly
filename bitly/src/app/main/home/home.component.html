@@ -201,6 +201,7 @@
             <input formControlName="long_link" type="url" class="form-control" placeholder="Insert the link to be shortened"/>
             <span *ngIf="!newLinkForm.controls['long_link'].valid && newLinkForm.controls['long_link'].touched">
               <span *ngIf="newLinkForm.controls['long_link'].hasError('required')" class="error-msg">Link can't be empty.</span>
+              <span *ngIf="newLinkForm.controls['long_link'].hasError('pattern')" class="error-msg">This link is invalid.</span>
             </span>
           </div>
           <div class="mb-3">
