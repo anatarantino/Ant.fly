@@ -48,6 +48,11 @@ class User(BaseModel):
     password: str
     username: str
 
+class UrlData(BaseModel):
+    short_link: str
+    title: str
+    long_link: str
+
 class Settings(BaseModel):
     authjwt_secret_key: str = "my_jwt_secret"
 
@@ -95,19 +100,20 @@ def home(Authorize: AuthJWT = Depends()):
     Authorize.jwt_required()
     current_user = Authorize.get_jwt_subject()
     links = connectionDB.get_user_links(current_user)
+    username = connectionDB.get_username(current_user)
     return JSONResponse(
         status_code=status_codes['ok'],
-        content={"links": links, "status_code": 200}
+        content={"links": links,"username":username, "status_code": 200}
     )
 
 auth_scheme = HTTPBearer()
-@app.post('/{short_link}')
-def create_link(long_link, short_link, title: Optional[str] = None, token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+@app.post('/url/{short_link}')
+def create_link(url_data: UrlData, token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
     settings = Settings()
     decoded = jwt.decode(token.credentials, settings.authjwt_secret_key, algorithms=["HS256"])
     id_user = decoded['sub']
-    if connectionDB.create_link(long_link, short_link, id_user, title) == -1:
-        raise HTTPException(status_code=status_codes['conflict'], detail=f"Link {short_link} already exists.")
+    if connectionDB.create_link(url_data.long_link, url_data.short_link, id_user, url_data.title) == -1:
+        raise HTTPException(status_code=status_codes['conflict'], detail=f"Link {url_data.short_link} already exists.")
     return JSONResponse(
         status_code=status_codes['ok'],
         content={"detail": "Link created successfully"}

@@ -1,6 +1,7 @@
 import bcrypt
 import psycopg2
 import redis
+from numpy.core.defchararray import lower
 
 from config import configPSQL, configREDIS
 
@@ -96,6 +97,13 @@ class Connection:
 
         return 1
 
+    def get_username(self, user_id):
+        query = "select name from users where user_id='{0}'".format(user_id)
+        self.cur.execute(query)
+        username = self.cur.fetchone()[0]
+        return username
+
+
 
     def get_user_links(self, id_user):
         query = "select * from urls_data where user_id = '{0}'".format(id_user)
@@ -132,6 +140,9 @@ class Connection:
 
 
     def create_link(self, long_link, short_link, id_user, title):
+        aux = lower(short_link)
+        if aux == 'home' or aux == 'register' or aux == 'login':
+            return -1
         if self.create_link_redis(short_link,long_link) == -1:
             return -1
         self.create_link_psql(id_user, title, short_link)

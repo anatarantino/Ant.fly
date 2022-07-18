@@ -28,4 +28,10 @@ export class ApiService {
       return res;
     }))
   }
+
+  deleteTypeRequest(url:string) {
+    return this.httpClient.delete(this.REST_API_SERVER+url).pipe(map(res => {
+      return res;
+    }))
+  }
 }

@@ -63,7 +63,7 @@
         <div class="title-author-container" style="padding-bottom: 0">
           <div class="row w-100" id="toprow">
             <div class="col-10 col-lg-8 col-md-8 col-sm-6" style="word-wrap: break-word;">
-              <h1>Welcome, user</h1>
+              <h1>Welcome, {{username}}</h1>
             </div>
           </div>
         </div>
@@ -92,12 +92,13 @@
             </div>
 
             <div class="row justify-content-center align-content-center align-items-center">
-                <div class="col-2">
-                  <button type="button" class="btn btn-dark color-btn add-btn" style="margin-top: 10px;"><i class="fa fa-plus"
-                                                                                                    aria-hidden="true"></i> Add link
-                  </button>
-                </div>
+              <div class="col-2">
+                <button type="button" class="btn btn-dark color-btn add-btn" data-bs-toggle="modal"
+                        data-bs-target="#exampleModal" style="margin-top: 10px;">
+                  <i class="fa fa-plus"></i> Add link
+                </button>
               </div>
+            </div>
 
             <div class="col-12 links-table">
               <div class="row justify-content-center align-content-center align-items-center" style="width: 80%">
@@ -136,7 +137,8 @@
                   </div>
                   <div class="col-1">
 
-                    <button type="button" class="btn btn-dark delete-btn"><i class="fa fa-trash" aria-hidden="true"></i>
+                    <button type="button" class="btn btn-dark delete-btn" (click)="deleteLink(link[3])"><i
+                      class="fa fa-trash" aria-hidden="true"></i>
                     </button>
                   </div>
 
@@ -164,7 +166,6 @@
               </div>
 
 
-
             </div>
           </div>
         </div>
@@ -174,4 +175,36 @@
     </div>
   </div>
 
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="newLinkForm" id="form" (ngSubmit)="newLinkSubmit()">
+          <div class="mb-3">
+            <label class="form-label">Title</label>
+            <input formControlName="title" type="text" class="form-control" placeholder="Name your link"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Link</label>
+            <input formControlName="long_link" type="text" class="form-control" placeholder="Insert the link to be shortened"/>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Short link</label>
+            <input formControlName="short_link" type="text" class="form-control" placeholder="ant.fly/your_short_link"/>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-dark color-btn" (click)="newLinkSubmit()">Submit</button>
+      </div>
+    </div>
+  </div>
 </div>
