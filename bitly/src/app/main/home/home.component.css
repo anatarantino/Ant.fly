@@ -1,101 +1,3 @@
-/*#parentDiv {*/
-/*  position: relative;*/
-/*  z-index: 1;*/
-/*}*/
-
-/*#childDiv {*/
-/*  position: absolute;*/
-/*  top: 0;*/
-/*  left: 0;*/
-/*  width: 100%;*/
-/*}*/
-
-/*.content {*/
-/*  background: rgba(167,96,255,0.5);*/
-/*}*/
-
-/*.body{*/
-/*  background: pink;*/
-/*}*/
-
-
-/*.circle{*/
-/*  position: absolute;*/
-/*  border-radius: 50%;*/
-/*  background: white;*/
-/*  animation: ripple 15s infinite;*/
-/*  box-shadow: 0px 0px 1px 0px #508fb9;*/
-/*}*/
-
-/*.small{*/
-/*  width: 200px;*/
-/*  height: 200px;*/
-/*  left: -100px;*/
-/*  bottom: -100px;*/
-/*}*/
-
-/*.medium{*/
-/*  width: 400px;*/
-/*  height: 400px;*/
-/*  left: -200px;*/
-/*  bottom: -200px;*/
-/*}*/
-
-/*.large{*/
-/*  width: 600px;*/
-/*  height: 600px;*/
-/*  left: -300px;*/
-/*  bottom: -300px;*/
-/*}*/
-
-/*.xlarge{*/
-/*  width: 800px;*/
-/*  height: 800px;*/
-/*  left: -400px;*/
-/*  bottom: -400px;*/
-/*}*/
-
-/*.xxlarge{*/
-/*  width: 1000px;*/
-/*  height: 1000px;*/
-/*  left: -500px;*/
-/*  bottom: -500px;*/
-/*}*/
-
-/*.shade1{*/
-/*  opacity: 0.2;*/
-/*}*/
-/*.shade2{*/
-/*  opacity: 0.5;*/
-/*}*/
-
-/*.shade3{*/
-/*  opacity: 0.7;*/
-/*}*/
-
-/*.shade4{*/
-/*  opacity: 0.8;*/
-/*}*/
-
-/*.shade5{*/
-/*  opacity: 0.9;*/
-/*}*/
-
-/*@keyframes ripple{*/
-/*  0%{*/
-/*    transform: scale(0.8);*/
-/*  }*/
-
-/*  50%{*/
-/*    transform: scale(1.2);*/
-/*  }*/
-
-/*  100%{*/
-/*    transform: scale(0.8);*/
-/*  }*/
-/*}*/
-
-
 .modal-open{
   position: relative;
   z-index: 4;
@@ -218,4 +120,52 @@
 .error-msg {
   color: #dc3545;
   font-size: .875em;
+}
+
+.dropdown-toggle[aria-expanded="true"], .order-dropdown-btn:focus {
+  color: #a760ff !important;
+  background-color: transparent !important;
+  border-color: #a760ff !important;
+}
+
+.dropdown-toggle:focus,
+.dropdown-toggle:active:focus,
+.order-dropdown-btn:focus,
+.order-dropdown-btn:active:focus,
+.btn-outline-dark.dropdown-toggle.show:focus {
+  box-shadow: 0 0 0 0.25rem transparent;
+}
+
+.list-dropdown {
+  float: none;
+  max-height: 250px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.dropdown-item:active {
+  color: black;
+  background-color: transparent;
+}
+
+.dropdown {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.dropdown-tag {
+  overflow: scroll;
+}
+
+.tag-label {
+  display: block;
+}
+
+.form-check-input:checked {
+    background-color: #a760ff;
+    border-color: #a760ff;
+}
+
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem transparent;
 }

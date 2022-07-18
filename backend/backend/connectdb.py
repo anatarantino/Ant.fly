@@ -103,7 +103,14 @@ class Connection:
         username = self.cur.fetchone()[0]
         return username
 
-
+    def get_user_tags(self, id_user):
+        query = "select tag_name from user_tags where user_id = '{0}'".format(id_user)
+        self.cur.execute(query)
+        result = self.cur.fetchall()
+        tags = []
+        for r in result:
+            tags.append(r[0])
+        return tags
 
     def get_user_links(self, id_user):
         query = "select * from urls_data where user_id = '{0}'".format(id_user)
@@ -127,13 +134,13 @@ class Connection:
             tags_result = self.cur.fetchall()
             tags = []
             for t in tags_result:
-                tag = []
-                tag.append(t[0])
+                # tag = []
+                # tag.append(t[0])
                 tags_name = "select tag_name from user_tags where tag_id = '{0}'".format(t[0])
                 self.cur.execute(tags_name)
                 tag_name_result = self.cur.fetchone()
-                tag.append(tag_name_result[0])
-                tags.append(tag)
+                # tag.append(tag_name_result[0])
+                tags.append(tag_name_result[0])
             results[i].append(tags)
         print(results)
         return results

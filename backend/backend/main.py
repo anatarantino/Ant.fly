@@ -105,9 +105,10 @@ def home(Authorize: AuthJWT = Depends()):
     current_user = Authorize.get_jwt_subject()
     links = connectionDB.get_user_links(current_user)
     username = connectionDB.get_username(current_user)
+    userTags = connectionDB.get_user_tags(current_user)
     return JSONResponse(
         status_code=status_codes['ok'],
-        content={"links": links,"username":username, "status_code": 200}
+        content={"links": links,"username":username,"userTags": userTags, "status_code": 200}
     )
 
 auth_scheme = HTTPBearer()

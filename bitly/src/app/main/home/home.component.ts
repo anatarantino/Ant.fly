@@ -12,7 +12,13 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 export class HomeComponent implements OnInit {
   private linksSub: Subscription;
-  links: []
+  links:any[] = []
+  search_result:any[] = []
+  search_bar_result:any[] = []
+  private userTagsSub: Subscription;
+  userTags:any[] = []
+  tags_search:any = []
+  tags_search_result:any[] = []
   username = ""
   minUrlLength: number = 3
   maxUrlLength: number = 60
@@ -60,7 +66,11 @@ export class HomeComponent implements OnInit {
   home() {
     this.linksSub = this._api.getTypeRequest('home').subscribe((res: any) => {
       this.links = res.links
+      this.search_result = res.links
+      this.search_bar_result = res.links
+      this.tags_search_result = res.links
       this.username = res.username
+      this.userTags = res.userTags
     }, err => {
       console.log(err)
     });
@@ -85,8 +95,9 @@ export class HomeComponent implements OnInit {
     let b = this.newLinkForm.value
     let short_link = b['short_link']
     this._api.postTypeRequest('url/' + short_link, b).subscribe((res: any) => {
-      this.newTagForm.reset()
+      this.newLinkForm.reset()
       this.home()
+      this.disabled = false;
     }, error => {
       console.log(error)
     })
@@ -99,11 +110,54 @@ export class HomeComponent implements OnInit {
     let tag_name = b['tag_name']
     this._api.postTypeRequest('url/' + short_link + '/tags/' + tag_name, b).subscribe((res: any) => {
       this.newTagForm.reset()
-      this.disabled = false;
       this.home()
     }, error => {
       console.log(error)
     })
+  }
+
+  onSearchEnter(e: KeyboardEvent, query: string) {
+    this.onSearch(query);
+  }
+
+
+  onSearch(query: string){
+    this.search_bar_result = this.links.filter((obj) => {
+      return obj[2].toLowerCase().includes(query.toLowerCase());
+    });
+
+    this.search_result = this.links.filter(value => this.tags_search_result.includes(value));
+    this.search_result = this.search_result.filter(value => this.search_bar_result.includes(value));
 
   }
+
+  updateTagsSearch(tag: string){
+
+    const index = this.tags_search.indexOf(tag);
+    if (index == -1) {
+      this.tags_search.push(tag);
+    }else {
+      this.tags_search.splice(index,1);
+    }
+
+    this.tags_search_result = this.links.filter((obj) => {
+      return this.tags_search.every((t: string) => {
+        return obj[5].includes(t)
+      })
+    })
+
+    console.log(this.tags_search)
+
+
+  this.search_result = this.links.filter(value => this.tags_search_result.includes(value));
+  this.search_result = this.search_result.filter(value => this.search_bar_result.includes(value));
+
+  }
+
+
+
+
+
+
+
 }
