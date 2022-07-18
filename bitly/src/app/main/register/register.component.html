@@ -1,5 +1,4 @@
 <div id="parentDiv">
-
   <div id="childDiv">
     <svg viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
       <defs>
@@ -75,6 +74,13 @@
                   </label>
                   <input formControlName="email" type="email" class="form-control"
                          style="text-transform:lowercase"/>
+                  <span *ngIf="!form.controls['email'].valid && form.controls['email'].touched">
+                    <span *ngIf="form.controls['email'].hasError('required')" class="error-msg">Must be between 6 and 254 characters.</span>
+                    <span *ngIf="form.controls['email'].hasError('minlength')" class="error-msg">Must be between 6 and 254 characters.</span>
+                    <span *ngIf="form.controls['email'].hasError('maxlength')" class="error-msg">Must be between 6 and 254 characters.</span>
+                    <span *ngIf="form.controls['email'].hasError('valid')"
+                          class="formError">This email is invalid.</span>
+                  </span>
                 </div>
               </div>
               <div class="row">
@@ -84,6 +90,11 @@
                   </label>
                   <input formControlName="username" type="text" class="form-control"
                          style="text-transform:lowercase"/>
+                  <span *ngIf="!form.controls['username'].valid && form.controls['username'].touched">
+                      <span *ngIf="form.controls['username'].hasError('required')" class="error-msg">Must be between 3 and 30 characters.</span>
+                      <span *ngIf="form.controls['username'].hasError('maxlength')" class="error-msg">Must be between 3 and 30 characters.</span>
+                      <span *ngIf="form.controls['username'].hasError('minlength')" class="error-msg">Must be between 3 and 30 characters.</span>
+                    </span>
                 </div>
               </div>
               <div class="col-12 mt-2">
@@ -92,8 +103,13 @@
                     Password
                   </label>
                   <div class="col-12">
-                    <input autocomplete="on" formControlName="password"
+                    <input autocomplete="on" formControlName="password" [type]="'password'"
                            class="form-control" id="password" name="password" aria-describedby="password input">
+                    <span *ngIf="!form.controls['password'].valid && form.controls['password'].touched">
+                      <span *ngIf="form.controls['password'].hasError('required')" class="error-msg">Must be between 6 and 30 characters.</span>
+                      <span *ngIf="form.controls['password'].hasError('maxlength')" class="error-msg">Must be between 6 and 30 characters.</span>
+                      <span *ngIf="form.controls['password'].hasError('minlength')" class="error-msg">Must be between 6 and 30 characters.</span>
+                    </span>
                   </div>
                 </div>
               </div>
@@ -108,7 +124,6 @@
                   </button>
                 </div>
               </div>
-
             </form>
           </div>
         </div>
