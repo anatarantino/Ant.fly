@@ -29,16 +29,16 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.newLinkForm = this.fb.group({
-      short_link: ['',
+      short_link: ['',[
         Validators.required,
         Validators.minLength(this.minUrlLength),
-        Validators.maxLength(this.maxUrlLength)],
-      title: ['',
+        Validators.maxLength(this.maxUrlLength)]],
+      title: ['',[
         Validators.required,
         Validators.minLength(this.minTitleLength),
-        Validators.maxLength(this.maxTitleLength)
+        Validators.maxLength(this.maxTitleLength)]
       ],
-      long_link: ['', Validators.required],
+      long_link: ['', [Validators.required]],
     });
     this.home()
   }
