@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit {
     this._api.postTypeRequest('login', b).subscribe((res: any) => {
       console.log(res)
       if(res.access_token){
+				res.access_token = res.access_token.replace(/^"(.*)"$/, '$1'); // Remove quotes from token start/end. This is a temp fix?!
         this._auth.setDataInLocalStorage('token', res.access_token)
         this.router.navigate(['home'])
       }

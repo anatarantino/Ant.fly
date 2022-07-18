@@ -96,6 +96,7 @@ class Connection:
 
         return 1
 
+
     def get_user_links(self, id_user):
         query = "select * from urls_data where user_id = '{0}'".format(id_user)
         self.cur.execute(query)
@@ -130,9 +131,9 @@ class Connection:
         return results
 
 
-    def create_link(self, long_link, short_link, user, title):
+    def create_link(self, long_link, short_link, id_user, title):
         self.create_link_redis(short_link,long_link)
-        # self.create_link_psql(user, title, short_link)
+        self.create_link_psql(id_user, title, short_link)
 
     def create_link_redis(self,short_link,long_link):
         if self.redisConn.exists(f"{short_link}"):
@@ -140,7 +141,7 @@ class Connection:
         self.redisConn.set(f"{short_link}", f"{long_link}")
 
 
-    def create_link_psql(self,user, title, short_link):
+    def create_link_psql(self,id_user, title, short_link):
         pass
 
     def delete_link(self,short_link):

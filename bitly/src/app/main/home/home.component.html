@@ -91,35 +91,13 @@
 
             </div>
 
-            <!--            <table class="table" style="width:65%" align="center">-->
-            <!--              <tbody>-->
-            <!--              <th style="text-align: center">Title</th>-->
-            <!--              <th style="text-align: center">Shortened link</th>-->
-            <!--              <th style="text-align: center">Link</th>-->
-            <!--              <tr>-->
-            <!--                <td style="text-align: center; vertical-align: middle">Mi linkcito</td>-->
-            <!--                <td style="text-align: center; vertical-align: middle">ant.fly/miLinkcito</td>-->
-            <!--                <td style="text-align: center; vertical-align: middle">google.com</td>-->
-            <!--                <td style="text-align: center; vertical-align: middle">-->
-            <!--                  <button type="button" class="btn btn-dark color-btn"><i class="fa fa-pencil" aria-hidden="true"></i>-->
-            <!--                  </button>-->
-            <!--                  <button type="button" class="btn btn-dark delete-btn"><i class="fa fa-trash" aria-hidden="true"></i>-->
-            <!--                  </button>-->
-            <!--                </td>-->
-            <!--              </tr>-->
-            <!--              <tr>-->
-            <!--                &lt;!&ndash;                 <span *ngFor="let cat of categoryStrings; index as i">&ndash;&gt;&ndash;&gt;-->
-            <!--                &lt;!&ndash;              <button *ngIf="i < 3" class="category category-div btn-outline"&ndash;&gt;-->
-            <!--                &lt;!&ndash;                      style="margin-bottom: 5px;margin-right: 6px;">{{cat}}</button>&ndash;&gt;-->
-            <!--                &lt;!&ndash;            </span>&ndash;&gt;-->
-            <!--                <td>-->
-            <!--                <span>-->
-            <!--                  <button class="category category-div btn-outline" style="margin-bottom: 5px;margin-right: 6px;">abc</button>-->
-            <!--                </span>-->
-            <!--                </td>-->
-            <!--              </tr>-->
-            <!--              </tbody>-->
-            <!--            </table>-->
+            <div class="row justify-content-center align-content-center align-items-center">
+                <div class="col-2">
+                  <button type="button" class="btn btn-dark color-btn add-btn" style="margin-top: 10px;"><i class="fa fa-plus"
+                                                                                                    aria-hidden="true"></i> Add link
+                  </button>
+                </div>
+              </div>
 
             <div class="col-12 links-table">
               <div class="row justify-content-center align-content-center align-items-center" style="width: 80%">
@@ -157,10 +135,6 @@
                     </button>
                   </div>
                   <div class="col-1">
-                    <button type="button" class="btn btn-dark delete-btn"><i class="fa fa-tag" aria-hidden="true"></i>
-                    </button>
-                  </div>
-                  <div class="col-1">
 
                     <button type="button" class="btn btn-dark delete-btn"><i class="fa fa-trash" aria-hidden="true"></i>
                     </button>
@@ -170,24 +144,27 @@
 
                 <!--            FOR EVERY TAG - esto estaria adentro del ngFor de cada link-->
 
-                <div class="row tag-row" style="width: 80%">
-                  <div class="col-12">
+                <div class="row justify-content-center align-content-center align-items-center" style="width: 80%">
+                  <div class="col-9 tag-label">
                     <span *ngFor="let tag of link[5]">
                       <button class="tag tag-div btn-outline">{{tag[1]}}</button>
                     </span>
                   </div>
+                  <div class="col-1">
+                    <button type="button" class="btn btn-dark color-btn"><i class="fa fa-tag" aria-hidden="true"></i>
+                    </button>
+                  </div>
+                  <div class="col-1"></div>
                 </div>
+
+                <div class="row" style="width: 80%">
+                  <hr>
+                </div>
+
               </div>
-              <!--end of ngFor-->
 
 
-              <div class="row justify-content-center align-content-center align-items-center">
-                <div class="col-2">
-                  <button type="button" class="btn btn-dark color-btn" style="margin-top: 10px;"><i class="fa fa-plus"
-                                                                                                    aria-hidden="true"></i>
-                  </button>
-                </div>
-              </div>
+
             </div>
           </div>
         </div>

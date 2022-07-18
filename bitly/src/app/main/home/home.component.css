@@ -109,12 +109,16 @@
   height: 35px;
   margin-right: 8px;
 }
+.add-btn{
+  margin-bottom: 30px;
+}
 
 .tag:hover {
   cursor: default !important;
 }
 
 .tag-div {
+  margin-bottom: 15px;
   padding: 5px 15px !important;
 }
 
@@ -122,6 +126,6 @@
   text-align: -webkit-center;
 }
 
-.tag-row {
+.tag-label {
   text-align: left;
 }

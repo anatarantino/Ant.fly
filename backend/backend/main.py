@@ -1,7 +1,10 @@
 from typing import Optional, Union
 
+import jwt
+import store as store
 from fastapi import FastAPI, HTTPException, Depends, Request
 from fastapi.responses import JSONResponse
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi_jwt_auth import AuthJWT
 from fastapi_jwt_auth.exceptions import AuthJWTException
 from fastapi.middleware.cors import CORSMiddleware
@@ -97,10 +100,14 @@ def home(Authorize: AuthJWT = Depends()):
         content={"links": links, "status_code": 200}
     )
 
+auth_scheme = HTTPBearer()
 @app.post('/{short_link}')
-def create_link(long_link, user: User, short_link, title: Optional[str] = None):
+def create_link(long_link, short_link, title: Optional[str] = None, token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
 
-    if connectionDB.create_link(long_link, short_link, user, title) == -1:
+    decoded = jwt.decode(token.credentials, "my_jwt_secret", algorithms=["HS256"])
+    id_user = decoded['sub']
+
+    if connectionDB.create_link(long_link, short_link, id_user, title) == -1:
         raise HTTPException(status_code=status_codes['conflict'], detail=f"Link {short_link} already exists.")
     return JSONResponse(
         status_code=status_codes['ok'],
