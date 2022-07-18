@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
   maxUrlLength: number = 60
   minTitleLength: number = 3
   maxTitleLength: number = 60
+  maxTagLength: number = 12
+
   constructor(
     private _api: ApiService,
     private _auth: AuthService,
@@ -26,14 +28,15 @@ export class HomeComponent implements OnInit {
   }
 
   newLinkForm: FormGroup
+  newTagForm: FormGroup
 
   ngOnInit(): void {
     this.newLinkForm = this.fb.group({
-      short_link: ['',[
+      short_link: ['', [
         Validators.required,
         Validators.minLength(this.minUrlLength),
         Validators.maxLength(this.maxUrlLength)]],
-      title: ['',[
+      title: ['', [
         Validators.required,
         Validators.minLength(this.minTitleLength),
         Validators.maxLength(this.maxTitleLength)]
@@ -43,6 +46,14 @@ export class HomeComponent implements OnInit {
         Validators.pattern('^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&\'\(\)\*\+,;=.]+$')
       ]],
     });
+
+    this.newTagForm = this.fb.group({
+      tag_name: ['', [
+        Validators.required,
+        Validators.maxLength(this.maxTagLength)
+      ]],
+      short_link: [''],
+    })
     this.home()
   }
 
@@ -68,6 +79,20 @@ export class HomeComponent implements OnInit {
     let b = this.newLinkForm.value
     let short_link = b['short_link']
     this._api.postTypeRequest('url/' + short_link, b).subscribe((res: any) => {
+      this.newTagForm.reset()
+      this.home()
+    }, error => {
+      console.log(error)
+    })
+
+  }
+
+  newTagLink(short_link: string){
+    this.newTagForm.patchValue({short_link: short_link})
+    let b = this.newTagForm.value
+    let tag_name = b['tag_name']
+    this._api.postTypeRequest('url/' + short_link + '/tags/' + tag_name, b).subscribe((res: any) => {
+      this.newTagForm.reset()
       this.home()
     }, error => {
       console.log(error)

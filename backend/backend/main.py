@@ -53,6 +53,10 @@ class UrlData(BaseModel):
     title: str
     long_link: str
 
+class TagData(BaseModel):
+    tag_name: str
+    short_link: str
+
 class Settings(BaseModel):
     authjwt_secret_key: str = "my_jwt_secret"
 
@@ -142,16 +146,19 @@ def change_link(old_link, short_link, title: Optional[str] = None):
     )
 
 auth_scheme = HTTPBearer()
-@app.post("/{short_link}/tags/{tag}")
-def create_tag(short_link,tag, token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+@app.post("/url/{short_link}/tags/{tag}")
+def create_tag(tag_data: TagData, token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    print("en create tag")
+    print(tag_data)
     settings = Settings()
     decoded = jwt.decode(token.credentials, settings.authjwt_secret_key, algorithms=["HS256"])
     id_user = decoded['sub']
-    result = connectionDB.create_tag(short_link, tag, id_user)
+    print(id_user)
+    result = connectionDB.create_tag(tag_data.short_link, tag_data.tag_name, id_user)
     if result == -1:
-        raise HTTPException(status_code=status_codes['error'], detail=f"Link {short_link} doesn't exist.")
+        raise HTTPException(status_code=status_codes['error'], detail=f"Link {tag_data.short_link} doesn't exist.")
     elif result == -2:
-        raise HTTPException(status_code=status_codes['error'], detail=f"Link {short_link} already has 5 tags")
+        raise HTTPException(status_code=status_codes['error'], detail=f"Link {tag_data.short_link} already has 5 tags")
     return JSONResponse(
         status_code=status_codes['ok'],
         content={"detail": "Tag created successfully"}
