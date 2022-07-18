@@ -141,6 +141,22 @@ def change_link(old_link, short_link, title: Optional[str] = None):
         content={"detail": "Link changed successfully"}
     )
 
+auth_scheme = HTTPBearer()
+@app.post("/{short_link}/tags/{tag}")
+def create_tag(short_link,tag, token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    settings = Settings()
+    decoded = jwt.decode(token.credentials, settings.authjwt_secret_key, algorithms=["HS256"])
+    id_user = decoded['sub']
+    result = connectionDB.create_tag(short_link, tag, id_user)
+    if result == -1:
+        raise HTTPException(status_code=status_codes['error'], detail=f"Link {short_link} doesn't exist.")
+    elif result == -2:
+        raise HTTPException(status_code=status_codes['error'], detail=f"Link {short_link} already has 5 tags")
+    return JSONResponse(
+        status_code=status_codes['ok'],
+        content={"detail": "Tag created successfully"}
+    )
+
 
 @app.get('/test-jwt')
 def user(Authorize: AuthJWT = Depends()):

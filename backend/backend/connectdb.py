@@ -170,10 +170,42 @@ class Connection:
 
     def change_link(self,old_link, short_link):
         if self.redisConn.exists(f"{old_link}"):
-            print("entre")
             long_link = self.redisConn.get(f"{old_link}")
             self.redisConn.delete(f"{old_link}")
             self.redisConn.set(f"{short_link}", long_link)
         else:
             return -1
         #add psql
+
+    def create_tag(self, short_link, tag, id_user):
+        tag = lower(tag)
+        if self.redisConn.exists(f"{short_link}"):
+            query_url_id = "select url_id from urls_data where redis_key = '{0}'".format(short_link)
+            self.cur.execute(query_url_id)
+            url_id = self.cur.fetchone()[0]
+
+            total_tags_query = "select count(distinct tag_id) from url_tags where url_id = '{0}'".format(url_id)
+            self.cur.execute(total_tags_query)
+            total_tags = self.cur.fetchone()[0]
+            if total_tags <= 4:
+                # primero chequeo si existe la tag para el usuario
+                fetch_tag = "select tag_id from user_tags where user_id = '{0}' and tag_name = '{1}'".format(id_user, tag)
+                self.cur.execute(fetch_tag)
+                tag_id = self.cur.fetchone()
+                if tag_id == None:
+                    create_tag = "insert into user_tags(user_id, tag_name) values ('{0}','{1}')".format(id_user, tag)
+                    self.cur.execute(create_tag)
+                    self.conn.commit()
+                    self.cur.execute(fetch_tag)
+                    tag_id = self.cur.fetchone()[0]
+                else:
+                    tag_id = tag_id[0]
+
+                # asociar tag a url
+                url_query = "insert into url_tags(tag_id, url_id) values ('{0}','{1}')".format(tag_id, url_id)
+                self.cur.execute(url_query)
+                self.conn.commit()
+            else:
+                return -2
+        else:
+            return -1
