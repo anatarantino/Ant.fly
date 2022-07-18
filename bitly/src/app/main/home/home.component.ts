@@ -19,7 +19,7 @@ export class HomeComponent implements OnInit {
   minTitleLength: number = 3
   maxTitleLength: number = 60
   maxTagLength: number = 12
-
+  disabled = false
   constructor(
     private _api: ApiService,
     private _auth: AuthService,
@@ -43,7 +43,7 @@ export class HomeComponent implements OnInit {
       ],
       long_link: ['', [
         Validators.required,
-        Validators.pattern('^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&\'\(\)\*\+,;=.]+$')
+        Validators.pattern(/^[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b(?:[-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/)
       ]],
     });
 
@@ -76,6 +76,12 @@ export class HomeComponent implements OnInit {
   }
 
   newLinkSubmit() {
+    this.disabled = true;
+    if (!this.newLinkForm.valid) {
+      this.newLinkForm.markAllAsTouched();
+      this.disabled = false;
+      return;
+    }
     let b = this.newLinkForm.value
     let short_link = b['short_link']
     this._api.postTypeRequest('url/' + short_link, b).subscribe((res: any) => {
@@ -93,6 +99,7 @@ export class HomeComponent implements OnInit {
     let tag_name = b['tag_name']
     this._api.postTypeRequest('url/' + short_link + '/tags/' + tag_name, b).subscribe((res: any) => {
       this.newTagForm.reset()
+      this.disabled = false;
       this.home()
     }, error => {
       console.log(error)
