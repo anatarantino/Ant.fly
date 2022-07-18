@@ -38,7 +38,10 @@ export class HomeComponent implements OnInit {
         Validators.minLength(this.minTitleLength),
         Validators.maxLength(this.maxTitleLength)]
       ],
-      long_link: ['', [Validators.required]],
+      long_link: ['', [
+        Validators.required,
+        Validators.pattern('^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&\'\(\)\*\+,;=.]+$')
+      ]],
     });
     this.home()
   }

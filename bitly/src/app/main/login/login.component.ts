@@ -27,12 +27,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      email: ['',[
+      email: ['', [
         Validators.required,
         Validators.maxLength(this.maxEmailLength),
         Validators.minLength(this.minEmailLength),
         Validators.pattern('^([a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+)*$')]],
-      password: ['',[
+      password: ['', [
         Validators.required,
         Validators.minLength(this.minPassLength),
         Validators.maxLength(this.maxPassLength)]],
@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.disabled=true;
+    this.disabled = true;
     if (!this.form.valid) {
       this.form.markAllAsTouched();
       this.disabled = false;
@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
         this._auth.setDataInLocalStorage('token', res.access_token)
         this.router.navigate(['home'])
       }
+      this.disabled = false;
     }, err => {
       this.disabled = false;
       console.log(err)

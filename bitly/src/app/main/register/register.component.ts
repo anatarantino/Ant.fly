@@ -29,16 +29,16 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      email: ['',[
+      email: ['', [
         Validators.required,
         Validators.maxLength(this.maxEmailLength),
         Validators.minLength(this.minEmailLength),
         Validators.pattern('^([a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+)*$')]],
-      password: ['',[
+      password: ['', [
         Validators.required,
         Validators.minLength(this.minPassLength),
         Validators.maxLength(this.maxPassLength)]],
-      username: ['',[
+      username: ['', [
         Validators.required,
         Validators.minLength(this.minUserLength),
         Validators.maxLength(this.maxUserLength)]]
@@ -47,8 +47,10 @@ export class RegisterComponent implements OnInit {
   }
 
   register() {
+    this.disabled = true;
     if (!this.form.valid) {
       this.form.markAllAsTouched();
+      this.disabled = false;
       return;
     }
     let b = this.form.value
@@ -63,6 +65,7 @@ export class RegisterComponent implements OnInit {
           console.log(err)
         })
       }
+      this.disabled = false;
     }, err => {
       console.log(err)
     });
