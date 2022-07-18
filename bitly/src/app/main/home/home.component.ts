@@ -14,7 +14,10 @@ export class HomeComponent implements OnInit {
   private linksSub: Subscription;
   links: []
   username = ""
-
+  minUrlLength: number = 3
+  maxUrlLength: number = 60
+  minTitleLength: number = 3
+  maxTitleLength: number = 60
   constructor(
     private _api: ApiService,
     private _auth: AuthService,
@@ -22,12 +25,19 @@ export class HomeComponent implements OnInit {
   ) {
   }
 
-    newLinkForm: FormGroup
+  newLinkForm: FormGroup
 
   ngOnInit(): void {
     this.newLinkForm = this.fb.group({
-      short_link: ['', Validators.required],
-      title: ['', Validators.required],
+      short_link: ['',
+        Validators.required,
+        Validators.minLength(this.minUrlLength),
+        Validators.maxLength(this.maxUrlLength)],
+      title: ['',
+        Validators.required,
+        Validators.minLength(this.minTitleLength),
+        Validators.maxLength(this.maxTitleLength)
+      ],
       long_link: ['', Validators.required],
     });
     this.home()
@@ -51,7 +61,7 @@ export class HomeComponent implements OnInit {
     )
   }
 
-  newLinkSubmit(){
+  newLinkSubmit() {
     let b = this.newLinkForm.value
     let short_link = b['short_link']
     this._api.postTypeRequest('url/' + short_link, b).subscribe((res: any) => {

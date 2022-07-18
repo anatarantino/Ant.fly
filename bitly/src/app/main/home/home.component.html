@@ -190,14 +190,27 @@
           <div class="mb-3">
             <label class="form-label">Title</label>
             <input formControlName="title" type="text" class="form-control" placeholder="Name your link"/>
+            <span *ngIf="!newLinkForm.controls['title'].valid && newLinkForm.controls['title'].touched">
+              <span *ngIf="newLinkForm.controls['title'].hasError('required')" class="error-msg">Must be between 3 and 60 characters.</span>
+              <span *ngIf="newLinkForm.controls['title'].hasError('maxlength')" class="error-msg">Must be between 3 and 60 characters.</span>
+              <span *ngIf="newLinkForm.controls['title'].hasError('minlength')" class="error-msg">Must be between 3 and 60 characters.</span>
+            </span>
           </div>
           <div class="mb-3">
             <label class="form-label">Link</label>
-            <input formControlName="long_link" type="text" class="form-control" placeholder="Insert the link to be shortened"/>
+            <input formControlName="long_link" type="url" class="form-control" placeholder="Insert the link to be shortened"/>
+            <span *ngIf="!newLinkForm.controls['long_link'].valid && newLinkForm.controls['long_link'].touched">
+              <span *ngIf="newLinkForm.controls['long_link'].hasError('required')" class="error-msg">Link can't be empty.</span>
+            </span>
           </div>
           <div class="mb-3">
             <label class="form-label">Short link</label>
             <input formControlName="short_link" type="text" class="form-control" placeholder="ant.fly/your_short_link"/>
+            <span *ngIf="!newLinkForm.controls['short_link'].valid && newLinkForm.controls['short_link'].touched">
+              <span *ngIf="newLinkForm.controls['short_link'].hasError('required')" class="error-msg">Must be between 3 and 60 characters.</span>
+              <span *ngIf="newLinkForm.controls['short_link'].hasError('maxlength')" class="error-msg">Must be between 3 and 60 characters.</span>
+              <span *ngIf="newLinkForm.controls['short_link'].hasError('minlength')" class="error-msg">Must be between 3 and 60 characters.</span>
+            </span>
           </div>
         </form>
       </div>
