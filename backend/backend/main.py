@@ -103,10 +103,9 @@ def home(Authorize: AuthJWT = Depends()):
 auth_scheme = HTTPBearer()
 @app.post('/{short_link}')
 def create_link(long_link, short_link, title: Optional[str] = None, token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
-
-    decoded = jwt.decode(token.credentials, "my_jwt_secret", algorithms=["HS256"])
+    settings = Settings()
+    decoded = jwt.decode(token.credentials, settings.authjwt_secret_key, algorithms=["HS256"])
     id_user = decoded['sub']
-
     if connectionDB.create_link(long_link, short_link, id_user, title) == -1:
         raise HTTPException(status_code=status_codes['conflict'], detail=f"Link {short_link} already exists.")
     return JSONResponse(
@@ -114,9 +113,12 @@ def create_link(long_link, short_link, title: Optional[str] = None, token: HTTPA
         content={"detail": "Link created successfully"}
     )
 
-
+auth_scheme = HTTPBearer()
 @app.delete('/{short_link}')
-def delete_link(short_link):
+def delete_link(short_link, token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    settings = Settings()
+    decoded = jwt.decode(token.credentials, settings.authjwt_secret_key, algorithms=["HS256"])
+    id_user = decoded['sub']
     if connectionDB.delete_link(short_link) == -1:
         raise HTTPException(status_code=status_codes['error'], detail=f"Link {short_link} doesn't exist.")
     return JSONResponse(
