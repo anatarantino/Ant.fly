@@ -169,3 +169,11 @@
 .form-check-input:focus {
   box-shadow: 0 0 0 0.25rem transparent;
 }
+
+a:link, link, active{
+  color: #8a2bff;
+}
+
+a:visited {
+  color: #a760ff;
+}

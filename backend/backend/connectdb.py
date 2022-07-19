@@ -210,11 +210,15 @@ class Connection:
                     tag_id = self.cur.fetchone()[0]
                 else:
                     tag_id = tag_id[0]
-
-                # asociar tag a url
-                url_query = "insert into url_tags(tag_id, url_id) values ('{0}','{1}')".format(tag_id, url_id)
-                self.cur.execute(url_query)
-                self.conn.commit()
+                # chequeo que no exista para la url
+                query = "select tag_id from url_tags where url_id = '{0}' and tag_id = '{1}'".format(url_id,tag_id)
+                self.cur.execute(query)
+                result = self.cur.fetchone()
+                if result == None:
+                    # asociar tag a url
+                    url_query = "insert into url_tags(tag_id, url_id) values ('{0}','{1}')".format(tag_id, url_id)
+                    self.cur.execute(url_query)
+                    self.conn.commit()
             else:
                 return -2
         else:
