@@ -39,7 +39,7 @@ http://localhost:4000
 
 - Python
 - FastAPI
-- PostreSQL
+- PostgreSQL
 - Redis
 
 ### Instalación 
