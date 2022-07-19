@@ -7,14 +7,17 @@ html { background-color: rgba(167,96,255,0.5); }
 }
 
 .content-container{
-  z-index: 10;
+  z-index: 3;
 }
 
+.ripple-background{
+  z-index: 1;
+}
 
 
 .circle{
   z-index: 1;
-  position: absolute;
+  position: fixed;
   border-radius: 50%;
   background: white;
   animation: ripple 15s infinite;
@@ -22,38 +25,38 @@ html { background-color: rgba(167,96,255,0.5); }
 }
 
 .small{
+  width: 100px;
+  height: 100px;
+  left: -50px;
+  bottom: -50px;
+}
+
+.medium {
   width: 200px;
   height: 200px;
   left: -100px;
   bottom: -100px;
 }
 
-.medium{
+.large{
+  width: 300px;
+  height: 300px;
+  left: -150px;
+  bottom: -150px;
+}
+
+.xlarge{
   width: 400px;
   height: 400px;
   left: -200px;
   bottom: -200px;
 }
 
-.large{
-  width: 600px;
-  height: 600px;
-  left: -300px;
-  bottom: -300px;
-}
-
-.xlarge{
-  width: 800px;
-  height: 800px;
-  left: -400px;
-  bottom: -400px;
-}
-
 .xxlarge{
-  width: 1000px;
-  height: 1000px;
-  left: -500px;
-  bottom: -500px;
+  width: 500px;
+  height: 500px;
+  left: -250px;
+  bottom: -250px;
 }
 
 .shade1{

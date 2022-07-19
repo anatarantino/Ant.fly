@@ -3,7 +3,7 @@ from typing import Optional, Union
 
 import jwt
 import store as store
-from fastapi import FastAPI, HTTPException, Depends, Request
+from fastapi import FastAPI, HTTPException, Depends, Request,Path
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from fastapi_jwt_auth import AuthJWT
@@ -163,12 +163,10 @@ def change_link(old_link, short_link, title: Optional[str] = None):
 auth_scheme = HTTPBearer()
 @app.post("/url/{short_link}/tags/{tag}")
 def create_tag(tag_data: TagData, token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
-    print("en create tag")
-    print(tag_data)
+
     settings = Settings()
     decoded = jwt.decode(token.credentials, settings.authjwt_secret_key, algorithms=["HS256"])
     id_user = decoded['sub']
-    print(id_user)
     result = connectionDB.create_tag(tag_data.short_link, tag_data.tag_name, id_user)
     if result == -1:
         raise HTTPException(status_code=status_codes['error'], detail=f"Link {tag_data.short_link} doesn't exist.")
@@ -178,6 +176,21 @@ def create_tag(tag_data: TagData, token: HTTPAuthorizationCredentials = Depends(
         status_code=status_codes['ok'],
         content={"detail": "Tag created successfully"}
     )
+
+auth_scheme = HTTPBearer()
+@app.delete("/url/{short_link}/tags/{tag}")
+def delete_tag(tag: str = Path(), short_link:str = Path(), token: HTTPAuthorizationCredentials = Depends(auth_scheme)):
+    settings = Settings()
+    decoded = jwt.decode(token.credentials, settings.authjwt_secret_key, algorithms=["HS256"])
+    id_user = decoded['sub']
+    result = connectionDB.delete_tag(short_link, tag, id_user)
+    if result == -1:
+        raise HTTPException(status_code=status_codes['error'], detail=f"Tag could not be deleted.")
+    return JSONResponse(
+        status_code=status_codes['ok'],
+        content={"detail": "Tag deleted successfully"}
+    )
+
 
 
 @app.get('/test-jwt')

@@ -142,7 +142,6 @@ class Connection:
                 # tag.append(tag_name_result[0])
                 tags.append(tag_name_result[0])
             results[i].append(tags)
-        print(results)
         return results
 
     def get_link(self, short_link):
@@ -220,3 +219,20 @@ class Connection:
                 return -2
         else:
             return -1
+
+    def delete_tag(self, short_link, tag_name, id_user):
+        query = "select tag_id from user_tags where user_id = '{0}' and tag_name = '{1}'".format(id_user,tag_name)
+        self.cur.execute(query)
+        tag_id = self.cur.fetchone()[0]
+        if tag_id == None:
+            return -1
+        query_url_id = "select url_id from urls_data where redis_key = '{0}'".format(short_link)
+        self.cur.execute(query_url_id)
+        url_id = self.cur.fetchone()[0]
+        if url_id == None:
+            return -1
+
+        query = "delete from url_tags where tag_id = '{0}' and url_id = '{1}'".format(tag_id, url_id)
+        self.cur.execute(query)
+        self.conn.commit()
+

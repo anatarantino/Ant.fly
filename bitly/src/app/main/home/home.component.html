@@ -79,7 +79,8 @@
             </div>
 
             <div class="col-12 links-table">
-              <div class="row justify-content-center align-content-center align-items-center" style="width: 80%; margin-left: 55px;">
+              <div class="row justify-content-center align-content-center align-items-center"
+                   style="width: 80%; margin-left: 55px;">
 
                 <div class="col-3" style="text-align: center">
                   <h5>Title</h5>
@@ -110,15 +111,13 @@
                     <p>{{link[4]}}</p>
                   </div>
                   <div class="col-1">
-                    <button type="button" class="btn btn-dark color-btn"><i class="fa fa-pencil" aria-hidden="true"></i>
-                    </button>
-                  </div>
-                  <div class="col-1">
 
                     <button type="button" class="btn btn-dark delete-btn" (click)="deleteLink(link[3])"><i
                       class="fa fa-trash" aria-hidden="true"></i>
                     </button>
                   </div>
+                  <div class="col-1"></div>
+
 
                 </div>
 
@@ -127,7 +126,8 @@
                 <div class="row justify-content-center align-content-center align-items-center" style="width: 80%">
                   <div class="col-9 tag-label">
                     <span *ngFor="let tag of link[5]">
-                      <button class="tag tag-div btn-outline">{{tag}}</button>
+                      <button class="tag tag-div btn-outline" (click)="remove_tag(link[3],tag)">{{tag}} <i
+                      class="fa fa-solid fa-close" aria-hidden="true"></i></button>
                     </span>
                   </div>
                   <div class="col-1">

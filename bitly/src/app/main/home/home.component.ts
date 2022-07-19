@@ -61,6 +61,7 @@ export class HomeComponent implements OnInit {
       ]],
       short_link: [''],
     })
+
     this.home()
   }
 
@@ -153,4 +154,17 @@ export class HomeComponent implements OnInit {
     this.search_result = this.search_result.filter(value => this.search_bar_result.includes(value));
   }
 
+
+  remove_tag(short_link: string, tag: string){
+
+
+    this._api.deleteTypeRequest('url/' + short_link + '/tags/' + tag).subscribe((res: any) => {
+      this.home()
+    }, error => {
+      console.log(error)
+    })
+  }
+
 }
+
+
