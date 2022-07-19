@@ -72,7 +72,7 @@ Para ejecutar el backend se debe instalar Python3 y pipenv, luego correr el ento
     pipenv install
 ```
 
-Por último para ejecutar el backend, en la carpeta de backend:
+Por último para ejecutar el backend, en la carpeta de backend/backend:
 
 ```bash
     uvicorn main:app --reload
