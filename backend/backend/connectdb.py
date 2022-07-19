@@ -145,10 +145,14 @@ class Connection:
         print(results)
         return results
 
+    def get_link(self, short_link):
+        if self.redisConn.exists(f"{short_link}"):
+            return self.redisConn.get(f"{short_link}")
+        return -1
+
 
     def create_link(self, long_link, short_link, id_user, title):
-        aux = lower(short_link)
-        if aux == 'home' or aux == 'register' or aux == 'login':
+        if lower(short_link) == 'home' or lower(short_link) == 'register' or lower(short_link) == 'login':
             return -1
         if self.create_link_redis(short_link,long_link) == -1:
             return -1

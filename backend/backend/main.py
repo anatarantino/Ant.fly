@@ -1,3 +1,4 @@
+import webbrowser
 from typing import Optional, Union
 
 import jwt
@@ -9,6 +10,7 @@ from fastapi_jwt_auth import AuthJWT
 from fastapi_jwt_auth.exceptions import AuthJWTException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
+from starlette.responses import RedirectResponse
 
 from connectdb import Connection
 
@@ -109,6 +111,18 @@ def home(Authorize: AuthJWT = Depends()):
     return JSONResponse(
         status_code=status_codes['ok'],
         content={"links": links,"username":username,"userTags": userTags, "status_code": 200}
+    )
+
+@app.get('/{short_link}')
+def get_link(short_link):
+    print("entre")
+    long_link = connectionDB.get_link(short_link)
+    if long_link == -1:
+        raise HTTPException(status_code=status_codes['error'], detail=f"Link {short_link} doesn't exist.")
+    long_link = long_link.decode('utf-8')
+    return JSONResponse(
+        status_code=status_codes['ok'],
+        content={"link": long_link}
     )
 
 auth_scheme = HTTPBearer()

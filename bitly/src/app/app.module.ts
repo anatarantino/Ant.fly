@@ -10,6 +10,7 @@ import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {InterceptorService} from "./services/interceptor-service.service";
 import { RegisterComponent } from './main/register/register.component';
+import { RedirectComponent } from './main/redirect/redirect.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { RegisterComponent } from './main/register/register.component';
     LoginComponent,
     ProfileComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    RedirectComponent
   ],
   imports: [
     BrowserModule,

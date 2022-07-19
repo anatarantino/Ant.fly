@@ -79,7 +79,7 @@
             </div>
 
             <div class="col-12 links-table">
-              <div class="row justify-content-center align-content-center align-items-center" style="width: 80%">
+              <div class="row justify-content-center align-content-center align-items-center" style="width: 80%; margin-left: 55px;">
 
                 <div class="col-3" style="text-align: center">
                   <h5>Title</h5>
@@ -96,7 +96,7 @@
               <!--            FOR EVERY LINK-->
               <!--ngFor-->
               <!--                <span *ngFor="let link of links; index as i">-->
-              <div *ngFor="let link of search_result; index as i">
+              <span *ngFor="let link of search_result; index as i">
 
                 <div class="row justify-content-center align-content-center align-items-center" style="width: 80%">
 
@@ -104,7 +104,7 @@
                     <p>{{link[2]}}</p>
                   </div>
                   <div class="col-3" style="text-align: center">
-                    <p>{{link[3]}}</p>
+                    <a href="{{link[3]}}">ant.fly/{{link[3]}}</a>
                   </div>
                   <div class="col-3" style="text-align: center">
                     <p>{{link[4]}}</p>
@@ -188,7 +188,7 @@
 
 
                 </div>
-              </div>
+              </span>
             </div>
 
 

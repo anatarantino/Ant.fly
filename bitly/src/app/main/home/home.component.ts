@@ -12,13 +12,13 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 export class HomeComponent implements OnInit {
   private linksSub: Subscription;
-  links:any[] = []
-  search_result:any[] = []
-  search_bar_result:any[] = []
+  links: any[] = []
+  search_result: any[] = []
+  search_bar_result: any[] = []
   private userTagsSub: Subscription;
-  userTags:any[] = []
-  tags_search:any = []
-  tags_search_result:any[] = []
+  userTags: any[] = []
+  tags_search: any = []
+  tags_search_result: any[] = []
   username = ""
   minUrlLength: number = 3
   maxUrlLength: number = 60
@@ -26,6 +26,7 @@ export class HomeComponent implements OnInit {
   maxTitleLength: number = 60
   maxTagLength: number = 12
   disabled = false
+
   constructor(
     private _api: ApiService,
     private _auth: AuthService,
@@ -104,7 +105,7 @@ export class HomeComponent implements OnInit {
 
   }
 
-  newTagLink(short_link: string){
+  newTagLink(short_link: string) {
     this.newTagForm.patchValue({short_link: short_link})
     let b = this.newTagForm.value
     let tag_name = b['tag_name']
@@ -121,7 +122,7 @@ export class HomeComponent implements OnInit {
   }
 
 
-  onSearch(query: string){
+  onSearch(query: string) {
     this.search_bar_result = this.links.filter((obj) => {
       return obj[2].toLowerCase().includes(query.toLowerCase());
     });
@@ -131,13 +132,13 @@ export class HomeComponent implements OnInit {
 
   }
 
-  updateTagsSearch(tag: string){
+  updateTagsSearch(tag: string) {
 
     const index = this.tags_search.indexOf(tag);
     if (index == -1) {
       this.tags_search.push(tag);
-    }else {
-      this.tags_search.splice(index,1);
+    } else {
+      this.tags_search.splice(index, 1);
     }
 
     this.tags_search_result = this.links.filter((obj) => {
@@ -148,16 +149,8 @@ export class HomeComponent implements OnInit {
 
     console.log(this.tags_search)
 
-
-  this.search_result = this.links.filter(value => this.tags_search_result.includes(value));
-  this.search_result = this.search_result.filter(value => this.search_bar_result.includes(value));
-
+    this.search_result = this.links.filter(value => this.tags_search_result.includes(value));
+    this.search_result = this.search_result.filter(value => this.search_bar_result.includes(value));
   }
-
-
-
-
-
-
 
 }

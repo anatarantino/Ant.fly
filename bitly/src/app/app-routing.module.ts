@@ -5,6 +5,7 @@ import { ProfileComponent } from './main/profile/profile.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import {HomeComponent} from "./main/home/home.component";
 import {RegisterComponent} from "./main/register/register.component";
+import {RedirectComponent} from "./main/redirect/redirect.component";
 
 const routes: Routes = [
 
@@ -27,6 +28,10 @@ const routes: Routes = [
     component: HomeComponent,
     canActivate:[AuthGuardService]
   },
+  {
+    path: ':url',
+    component: RedirectComponent
+  }
 ];
 
 @NgModule({
