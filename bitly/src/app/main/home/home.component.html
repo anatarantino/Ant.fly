@@ -92,7 +92,7 @@
             </div>
 
             <div *ngIf="links.length!=0; else linksEmpty" class="col-12 links-table">
-              <div class="row justify-content-center align-content-center align-items-center" style="width: 80%; margin-left: 55px;">
+              <div class="row justify-content-center align-content-center align-items-center" style="width: 80%;">
 
                 <div class="col-3" style="text-align: center">
                   <h5>Title</h5>
@@ -108,7 +108,6 @@
 
               <!--            FOR EVERY LINK-->
               <!--ngFor-->
-              <!--                <span *ngFor="let link of links; index as i">-->
               <span *ngFor="let link of search_result; index as i">
 
                 <div class="row justify-content-center align-content-center align-items-center" style="width: 80%">
@@ -120,7 +119,12 @@
                     <a href="{{link[3]}}">ant.fly/{{link[3]}}</a>
                   </div>
                   <div class="col-3" style="text-align: center">
-                    <p>{{link[4]}}</p>
+                    <p>{{link[5]}}</p>
+                  </div>
+                  <div class="col-1">
+                     <p >{{link[4]}} <i
+                      class="fa fa-solid fa-bar-chart" aria-hidden="true"></i>
+                    </p>
                   </div>
                   <div class="col-1">
 
@@ -137,11 +141,12 @@
 
                 <div class="row justify-content-center align-content-center align-items-center" style="width: 80%">
                   <div class="col-9 tag-label">
-                    <span *ngFor="let tag of link[5]">
+                    <span *ngFor="let tag of link[6]">
                       <button class="tag tag-div btn-outline" (click)="remove_tag(link[3],tag)">{{tag}} <i
                       class="fa fa-solid fa-close" aria-hidden="true"></i></button>
                     </span>
                   </div>
+                  <div class="col-1"></div>
                   <div class="col-1">
                     <button type="button" class="btn btn-dark color-btn" data-bs-toggle="modal"
                             [attr.data-bs-target]="'#newTagModal' + link[0]"><i class="fa fa-tag"

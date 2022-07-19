@@ -5,6 +5,15 @@
   <div class="circle large shade3"></div>
   <div class="circle mediun shade4"></div>
   <div class="circle small shade5"></div>
+  <div class="row align-self-center">
+  <div class="content col-12" *ngIf="!invalid" style="text-align: center">
     <h4>Redirecting to {{long_url}}</h4>
+  </div>
+  <div class="content" *ngIf="invalid" style="text-align: center">
+    <h4>The link you are looking for doesn't exist</h4>
+    <a href="/home">Try creating it here!</a>
+  </div>
+    </div>
+
 </div>
 </body>

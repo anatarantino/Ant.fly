@@ -11,7 +11,7 @@ export class RedirectComponent implements OnInit {
 
   long_url: string = ""
   href = ""
-
+  invalid = true
   constructor(
     private _api: ApiService,
     private router: Router,
@@ -27,9 +27,10 @@ export class RedirectComponent implements OnInit {
   redirect(url: string) {
     return this._api.getTypeRequest(url).subscribe((res: any) => {
       this.long_url = res.link
-      console.log(this.long_url)
+      this.invalid = false
       window.location.href = 'http://' + this.long_url
     }, error => {
+      this.invalid = true
       console.log(error)
     })
   }

@@ -55,7 +55,7 @@ class Connection:
 
     def create_tables(self):
         self.cur.execute("create table if not exists users( user_id serial primary key, email varchar(255) unique not null, password text not null, name varchar(50) not null);")
-        self.cur.execute("create table if not exists urls_data(url_id serial primary key, user_id integer references users(user_id) on delete cascade , title text, redis_key text);")
+        self.cur.execute("create table if not exists urls_data(url_id serial primary key, user_id integer references users(user_id) on delete cascade , title text, redis_key text, clicks integer default 0);")
         self.cur.execute("create table if not exists user_tags(tag_id serial primary key, user_id integer references users(user_id) on delete cascade, tag_name text)")
         self.cur.execute("create table if not exists url_tags(tag_id integer references user_tags(tag_id) on delete cascade , url_id integer references urls_data(url_id) on delete cascade);")
         self.conn.commit()
@@ -177,16 +177,6 @@ class Connection:
         else:
             return -1
 
-
-    def change_link(self,old_link, short_link):
-        if self.redisConn.exists(f"{old_link}"):
-            long_link = self.redisConn.get(f"{old_link}")
-            self.redisConn.delete(f"{old_link}")
-            self.redisConn.set(f"{short_link}", long_link)
-        else:
-            return -1
-        #add psql
-
     def create_tag(self, short_link, tag, id_user):
         tag = lower(tag)
         if self.redisConn.exists(f"{short_link}"):
@@ -219,6 +209,8 @@ class Connection:
                     url_query = "insert into url_tags(tag_id, url_id) values ('{0}','{1}')".format(tag_id, url_id)
                     self.cur.execute(url_query)
                     self.conn.commit()
+                else:
+                    return -3
             else:
                 return -2
         else:
@@ -240,3 +232,7 @@ class Connection:
         self.cur.execute(query)
         self.conn.commit()
 
+    def add_click(self, short_link):
+        query = "update urls_data set clicks = clicks + 1 where redis_key = '{0}'".format(short_link)
+        self.cur.execute(query)
+        self.conn.commit()

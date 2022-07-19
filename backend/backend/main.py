@@ -112,11 +112,11 @@ def home(Authorize: AuthJWT = Depends()):
 
 @app.get('/{short_link}')
 def get_link(short_link):
-    print("entre")
     long_link = connectionDB.get_link(short_link)
     if long_link == -1:
         raise HTTPException(status_code=status_codes['error'], detail=f"Link {short_link} doesn't exist.")
     long_link = long_link.decode('utf-8')
+    connectionDB.add_click(short_link)
     return JSONResponse(
         status_code=status_codes['ok'],
         content={"link": long_link}
@@ -169,6 +169,8 @@ def create_tag(tag_data: TagData, token: HTTPAuthorizationCredentials = Depends(
         raise HTTPException(status_code=status_codes['error'], detail=f"Link {tag_data.short_link} doesn't exist.")
     elif result == -2:
         raise HTTPException(status_code=status_codes['error'], detail=f"Link {tag_data.short_link} already has 5 tags")
+    elif result == -3:
+        raise HTTPException(status_code=status_codes['error'], detail=f"Link {tag_data.short_link} already has that tag")
     return JSONResponse(
         status_code=status_codes['ok'],
         content={"detail": "Tag created successfully"}
