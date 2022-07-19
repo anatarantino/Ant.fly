@@ -1,4 +1,4 @@
-.modal-open{
+.modal-open {
   position: relative;
   z-index: 4;
 }
@@ -43,7 +43,7 @@
   color: #a760ff !important;
   background-color: transparent !important;
   border-color: #a760ff !important;
-    box-shadow: 0 0 0 0.25rem transparent;
+  box-shadow: 0 0 0 0.25rem transparent;
 
 }
 
@@ -96,7 +96,8 @@
   height: 35px;
   margin-right: 8px;
 }
-.add-btn{
+
+.add-btn {
   margin-bottom: 30px;
 }
 
@@ -162,18 +163,74 @@
 }
 
 .form-check-input:checked {
-    background-color: #a760ff;
-    border-color: #a760ff;
+  background-color: #a760ff;
+  border-color: #a760ff;
 }
 
 .form-check-input:focus {
   box-shadow: 0 0 0 0.25rem transparent;
 }
 
-a:link, link, active{
+a:link, link, active {
   color: #8a2bff;
 }
 
 a:visited {
   color: #a760ff;
 }
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgba(51, 51, 51, 0.1);
+}
+
+li {
+  float: right;
+}
+
+li a {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 20px;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.logo-container {
+  float: left;
+  padding: 0;
+}
+
+.logo {
+  float: left;
+  margin: 5px;
+}
+
+btn-group-sm > .btn, .btn-sm {
+  font-size: 20px !important;
+}
+
+.nav-btn-reg {
+  border-color: black;
+  color: black !important;
+  background-color: transparent !important;
+  padding-bottom: 4px !important;
+  padding-top: 4px !important;
+  margin-top: 10px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+
+.nav-btn-log:hover, .nav-btn-reg:hover, .nav-btn-reg:active, .nav-btn-reg:focus {
+  border-color: #8a2bff;
+  color: #8a2bff !important;
+  background-color: transparent !important;
+}
+
+

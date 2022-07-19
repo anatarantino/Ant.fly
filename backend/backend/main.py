@@ -1,8 +1,5 @@
-import webbrowser
-from typing import Optional, Union
-
+from typing import Optional
 import jwt
-import store as store
 from fastapi import FastAPI, HTTPException, Depends, Request,Path
 from fastapi.responses import JSONResponse
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -78,10 +75,10 @@ def authjwt_exception_handler(request: Request, exc: AuthJWTException):
 
 @app.get("/")
 def read_root():
-    return {"Hello": "World Rasyue"}
+    return {"Hello": "ant.fly"}
 
 @app.post('/register')
-def register(user: User, Authorize: AuthJWT = Depends()):
+def register(user: User):
     if connectionDB.register(user) == -1:
         raise HTTPException(status_code=status_codes['conflict'], detail=f"Email {user.email} already exists.")
     print(user)
@@ -98,7 +95,7 @@ def login(user: User, Authorize: AuthJWT = Depends()):
     if result == -2:
         raise HTTPException(status_code=status_codes['unauthorized'], detail=f"Password does not match.")
 
-    access_token = Authorize.create_access_token(subject=user.id_user)
+    access_token = Authorize.create_access_token(subject=user.id_user, expires_time=60*60*60)
     return {"access_token": access_token}
 
 @app.get('/home')

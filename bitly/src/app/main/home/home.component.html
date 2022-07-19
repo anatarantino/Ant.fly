@@ -1,4 +1,17 @@
 <body>
+<nav class="top_nav">
+  <div style="background: rgba(138,43,255,0.5)">
+    <ul style="padding-left:0px">
+    <li class="nav-item"><button (click)="logout()" class="ba btn btn-sm btn-outline-dark b2 nav-btn-reg">
+        Logout</button>
+      </li>
+      <li class="logo-container">
+      <img src='./assets/logo_name.png' alt="Logo" height="50px" width="150px" class="logo">
+      </li>
+    </ul>
+  </div>
+</nav>
+
 <div class="ripple-background">
   <div class="circle xxlarge shade1"></div>
   <div class="circle xlarge shade2"></div>
@@ -78,9 +91,8 @@
               </div>
             </div>
 
-            <div class="col-12 links-table">
-              <div class="row justify-content-center align-content-center align-items-center"
-                   style="width: 80%; margin-left: 55px;">
+            <div *ngIf="links.length!=0; else linksEmpty" class="col-12 links-table">
+              <div class="row justify-content-center align-content-center align-items-center" style="width: 80%; margin-left: 55px;">
 
                 <div class="col-3" style="text-align: center">
                   <h5>Title</h5>
@@ -191,6 +203,13 @@
               </span>
             </div>
 
+            <ng-template #linksEmpty>
+             <div class="row justify-content-center align-content-center align-items-center">
+              <div class="col-12" style="text-align: center">
+                <h5>You don't have any links yet     </h5>
+              </div>
+             </div>
+            </ng-template>
 
           </div>
         </div>
@@ -252,7 +271,10 @@
       </div>
     </div>
   </div>
+
 </div>
+
+
 
 <!--    </div>-->
 

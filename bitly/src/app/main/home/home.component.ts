@@ -3,6 +3,7 @@ import {AuthService} from "../../services/auth.service";
 import {ApiService} from "../../services/api.service";
 import {Subscription} from "rxjs";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,8 @@ export class HomeComponent implements OnInit {
   constructor(
     private _api: ApiService,
     private _auth: AuthService,
-    public fb: FormBuilder
+    public fb: FormBuilder,
+    private router: Router
   ) {
   }
 
@@ -163,6 +165,15 @@ export class HomeComponent implements OnInit {
     }, error => {
       console.log(error)
     })
+  }
+
+
+  logout(){
+    localStorage.removeItem('token');
+    this._auth.clearStorage()
+
+    this.router.navigate(['login']);
+
   }
 
 }
