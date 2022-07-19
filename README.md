@@ -44,14 +44,24 @@ http://localhost:4000
 
 ### Instalación 
 
-Descargar y correr las imágenes provistas por la cátedra de Redis y PostgreSQL.
+Para instalar Redis
+```bash
+  docker pull redis
+  docker run --name Myredis -p 6379:6379 -d redis
+```
+Redis estará corriendo en el puerto **6379**
 
-Asignar a Redis el puerto **6379** y a PostgreSQL el puerto **5433**.
+Para instalar PostgreSQL
+```bash
+  docker pull postgres
+  docker run -e POSTGRES_PASSWORD=postgres -e POSTGRES_USER=postgres --name postgresql -p 5433:5432 -d postgres
+```
+Es importante que se deje el usuario **postgres** con contraseña **postgres**.
 
-Crear el usuario postgres con contraseña postgres para esta última, y crear la base bitly.
+Luego crear la base antfly.  Para ello, una vez conectados a la misma, mediante CLI o un entorno gráfico, ejecutar el siguiente comando:
 
 ```bash
-  CREATE DATABASE bitly 
+  CREATE DATABASE antfly 
 ```
 
 
